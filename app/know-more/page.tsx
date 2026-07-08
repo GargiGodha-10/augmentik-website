@@ -40,18 +40,7 @@ const cards = [
     desc: "Track every candidate from screening to onboarding in one place.",
     tag: "End-to-End Workflow",
   },
-  {
-    icon: "💰",
-    title: "Invoicing & Finance",
-    desc: "Manage invoices, GST, TDS and consultant payouts effortlessly.",
-    tag: "Auto GST + TDS",
-  },
-  {
-    icon: "📊",
-    title: "Dashboard & Reports",
-    desc: "View revenue, opportunities, recruiter KPIs and performance insights.",
-    tag: "Live Reports",
-  },
+  
 ];
 
 export default function KnowMore() {
@@ -83,8 +72,8 @@ export default function KnowMore() {
           <Image
             src="/final logo.png"
             alt="logo"
-            width={50}
-            height={50}
+            width={70}
+            height={70}
           />
 
           <h1 className="ml-4 text-3xl font-bold bg-gradient-to-r from-white via-violet-300 to-fuchsia-300 bg-clip-text text-transparent">
@@ -137,7 +126,7 @@ export default function KnowMore() {
 
             key={index}
 
-            className="min-w-[320px] h-[360px] rounded-3xl bg-white/5 backdrop-blur-xl border border-violet-500/20 shadow-[0_0_30px_rgba(139,92,246,.15)] p-8 flex flex-col"
+            className="min-w-[300px] h-[360px] rounded-3xl bg-white/5 backdrop-blur-xl border border-violet-500/20 shadow-[0_0_30px_rgba(139,92,246,.15)] p-8 flex flex-col"
 
           >
 
