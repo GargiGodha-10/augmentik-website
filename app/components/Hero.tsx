@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -50,9 +50,13 @@ export default function Hero() {
               Book a Demo
             </button>
 
-            <button className="border border-gray-500 hover:bg-white hover:text-black transition duration-300 px-9 py-4 rounded-xl font-semibold">
-              Explore Platform
-            </button>
+<Link
+  href="/explore-platform"
+  onClick={() => console.log("clicked")}
+  className="border border-gray-500 hover:bg-white hover:text-black transition duration-300 px-9 py-4 rounded-xl font-semibold"
+>
+  Explore Platform
+</Link>
 
           </div>
 
