@@ -76,7 +76,7 @@ export default function KnowMore() {
             height={70}
           />
 
-          <h1 className="ml-4 text-3xl font-bold bg-gradient-to-r from-white via-violet-300 to-fuchsia-300 bg-clip-text text-transparent">
+          <h1 className="ml-0 text-3xl font-bold bg-gradient-to-r from-white via-violet-300 to-fuchsia-300 bg-clip-text text-transparent">
             Augmentik
           </h1>
 
@@ -85,18 +85,27 @@ export default function KnowMore() {
       </header>
 
       {/* Heading */}
+<div className="text-center pt-30 mb-16">
 
-      <div className="pt-36 pb-12 text-center">
 
-        <h1 className="text-5xl font-bold">
-          Explore Our Platform
-        </h1>
 
-        <p className="text-gray-300 mt-5">
-          Everything you need to manage recruitment with AI.
-        </p>
+<h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-center leading-tight">
+  <span className="bg-gradient-to-r from-white via-violet-200 to-fuchsia-400 bg-clip-text text-transparent">
+    Explore Our Platform
+  </span>
+</h1>
 
-      </div>
+  <div className="mx-auto mt-10 h-[2px] w-36 rounded-full bg-gradient-to-r from-transparent via-violet-500 to-transparent" />
+
+  <p className="mt-8 max-w-3xl mx-auto text-lg md:text-xl leading-9 text-gray-300">
+    Experience the next generation of
+    <span className="text-violet-300 font-semibold"> AI-powered recruitment</span>,
+    where intelligent automation streamlines
+    <span className="text-white font-medium"> hiring, vendor management, candidate tracking, </span>
+    and business operations through one unified platform.
+  </p>
+
+</div>
 
       {/* Horizontal Cards */}
 
