@@ -1,297 +1,305 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Image from "next/image";
-
-const leftFeatures = [
-  "Personalized Career Guidance",
-  "Resume Intelligence",
-  "Interview Preparation",
-  "Skill Assessment",
-  "Job Matching",
-];
-
-const rightFeatures = [
-  "AI-powered Hiring",
-  "Smart Knowledge Base",
-  "AI Assistant",
-  "Workforce Automation",
-  "Analytics & Insights",
-];
-
-function FeatureCard({
-  title,
-  align,
-}: {
-  title: string;
-  align: "left" | "right";
-}) {
-  return (
-    <motion.div
-      whileHover={{
-        scale: 1.05,
-        x: align === "left" ? 8 : -8,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 260,
-      }}
-      className={`
-        group
-        relative
-        w-[320px]
-        h-[90px]
-        rounded-[26px]
-        bg-[#24153d]/95
-        border
-        border-violet-500/25
-        backdrop-blur-xl
-        overflow-hidden
-        shadow-[0_12px_40px_rgba(0,0,0,.35)]
-        flex
-        items-center
-        px-8
-      `}
-    >
-      {/* Hover Glow */}
-
-      <div
-        className="
-        absolute
-        inset-0
-        opacity-0
-        group-hover:opacity-100
-        transition-all
-        duration-500
-        bg-gradient-to-r
-        from-violet-500/15
-        via-fuchsia-500/15
-        to-violet-500/15
-        blur-xl
-        "
-      />
-
-      {/* Side Accent */}
-
-      <div
-        className={`
-          absolute
-          top-0
-          ${align === "left" ? "left-0" : "right-0"}
-          h-full
-          w-[6px]
-          rounded-full
-          bg-gradient-to-b
-          from-violet-400
-          via-fuchsia-400
-          to-violet-500
-        `}
-      />
-
-      {/* Connection Dot */}
-
-      <div
-        className={`
-          absolute
-          top-1/2
-          -translate-y-1/2
-          ${align === "left" ? "-right-[10px]" : "-left-[10px]"}
-          w-5
-          h-5
-          rounded-full
-          bg-white
-          shadow-[0_0_18px_#d8b4fe]
-          border-4
-          border-violet-400
-        `}
-      />
-
-      <h3 className="relative z-10 text-[25px] font-bold leading-snug text-white">
-        {title}
-      </h3>
-    </motion.div>
-  );
-}
+import { motion } from "framer-motion";
 
 export default function About() {
-    return (
+  return (
     <section
       id="about"
-      className="relative overflow-hidden bg-[#160B2C] py-28 text-white"
+      className="relative overflow-hidden bg-[#140B26] py-24"
     >
-      {/* Background */}
-
-      <div className="absolute inset-0 bg-gradient-to-br from-[#160B2C] via-[#241142] to-[#160B2C]" />
-
       {/* Background Glow */}
+      <div className="absolute -left-40 -top-40 h-[500px] w-[500px] rounded-full bg-violet-700/20 blur-[180px]" />
 
-      <div className="absolute -left-40 top-24 h-[520px] w-[520px] rounded-full bg-violet-700/20 blur-[180px]" />
-      <div className="absolute right-0 bottom-0 h-[520px] w-[520px] rounded-full bg-fuchsia-700/20 blur-[180px]" />
+      <div className="absolute -right-40 bottom-0 h-[500px] w-[500px] rounded-full bg-fuchsia-600/10 blur-[180px]" />
 
-      <div className="relative z-10 max-w-[1600px] mx-auto px-8">
+      {/* Floating Particles */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(25)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute h-2 w-2 rounded-full bg-violet-300/50"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [-15, 15, -15],
+              opacity: [0.2, 1, 0.2],
+            }}
+            transition={{
+              duration: 4 + Math.random() * 3,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-8">
 
         {/* Heading */}
 
         <motion.div
-          initial={{ opacity: 0, y: 35 }}
+          initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: .8 }}
           viewport={{ once: true }}
-          className="text-center mb-24"
+          transition={{ duration: 0.8 }}
+          className="mb-6 text-center"
         >
-          <h2 className="text-6xl font-black bg-gradient-to-r from-white via-violet-300 to-fuchsia-400 bg-clip-text text-transparent">
-            About Augmentik
+
+          <p className="text-xs font-semibold uppercase tracking-[10px] text-violet-400">
+            ABOUT AUGMENTIK
+          </p>
+
+          <h2 className="mt-5 text-4xl font-black leading-tight text-white md:text-6xl">
+            Building the Future of
           </h2>
 
-          <p className="max-w-3xl mx-auto mt-8 text-[20px] leading-9 font-light text-gray-300 tracking-wide">
-            Learn how
-            <span className="text-violet-300 font-medium"> Augmentik</span>
-            leverages
-            <span className="text-violet-300 font-medium">
-              {" "}Artificial Intelligence
-            </span>
-            {" "}to transform hiring,
-            <span className="text-violet-300 font-medium">
-              {" "}career growth
-            </span>
-            , and
-            <span className="text-violet-300 font-medium">
-              {" "}workforce productivity.
-            </span>
+          <h2 className="bg-gradient-to-r from-violet-300 via-fuchsia-400 to-violet-500 bg-clip-text text-5xl font-black text-transparent md:text-6xl">
+            AI Workforces
+          </h2>
+
+          <p className="mx-auto mt-8 max-w-3xl text-base leading-8 text-gray-400">
+            Empowering businesses with intelligent hiring, automation,
+            knowledge management and AI assistance — all from one
+            beautifully connected platform.
           </p>
 
         </motion.div>
 
-        {/* FLOWCHART */}
+        {/* Main Content */}
 
-       <div className="relative flex items-center justify-center min-h-[600px] -translate-y-16">
-
-          {/* LEFT CARDS */}
-
-          <div className="absolute left-[10%] top-1/2 -translate-y-1/2 flex flex-col gap-7 z-20">
-
-            {leftFeatures.map((item) => (
-              <FeatureCard
-                key={item}
-                title={item}
-                align="left"
-              />
-            ))}
-
-          </div>
-
-          {/* RIGHT CARDS */}
-
-          <div className="absolute right-[10%] top-1/2 -translate-y-1/2 flex flex-col gap-7 z-20">
-
-            {rightFeatures.map((item) => (
-              <FeatureCard
-                key={item}
-                title={item}
-                align="right"
-              />
-            ))}
-
-          </div>
-
- 
-
-          {/* CENTER CIRCLE */}
+        <div className="grid lg:grid-cols-[0.9fr_1.1fr] items-center gap-10 -mt-6">
+                    {/* LEFT */}
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.85 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
+            initial={{ opacity: 0, x: -80 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="relative z-30 flex items-center justify-center"
+            transition={{ duration: 0.8 }}
+            className="pr-6"
           >
+            <p className="mb-5 text-xs font-semibold uppercase tracking-[8px] text-violet-400">
+              Our Vision
+            </p>
 
-            {/* OUTER GLOW */}
+            <h3 className="text-4xl font-black leading-tight text-white">
+              One Intelligent Platform.
+              <br />
+              Infinite Possibilities.
+            </h3>
 
-            <div className="absolute w-[560px] h-[560px] rounded-full bg-violet-600/20 blur-[120px]" />
+            <p className="mt-8 max-w-[560px] text-base leading-9 text-gray-300">
+              Augmentik combines AI-powered hiring, intelligent automation,
+              knowledge management, resume analysis and smart assistants into
+              one unified platform—helping organizations work faster, make
+              better decisions and unlock the true potential of artificial
+              intelligence.
+            </p>
 
-            {/* OUTER RING */}
+            {/* Highlights */}
 
-            <div className="absolute w-[450px] h-[450px] rounded-full border-[10px] border-violet-400/20" />
-
-            {/* MAIN CIRCLE */}
-
-            <div className="relative w-[380px] h-[380px] rounded-full bg-[#241142] border-[8px] border-violet-400 shadow-[0_0_70px_rgba(168,85,247,.35)] flex items-center justify-center">
-
-              {/* INNER RING */}
-
-              <div className="absolute w-[300px] h-[300px] rounded-full border border-violet-400/20" />
-
-              {/* AUGGIE */}
+            <div className="mt-12 space-y-6">
 
               <motion.div
-                animate={{
-                  y: [0, -10, 0],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                }}
-                className="relative z-20"
+                whileHover={{ x: 8 }}
+                className="flex items-center gap-6"
               >
-                <Image
-                  src="/removebg auggie.png"
-                  alt="Auggie"
-                  width={600}
-                  height={600}
-                  className="rounded-3xl object-contain"
-                />
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-600/20 border border-violet-500/30">
+                  ⚡
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-white">
+                    AI Powered Automation
+                  </h4>
+
+                  <p className="text-gray-400">
+                    Automate repetitive workflows effortlessly.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                whileHover={{ x: 8 }}
+                className="flex items-center gap-6"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-600/20 border border-violet-500/30">
+                  🤖
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-white">
+                    Smart AI Assistant
+                  </h4>
+
+                  <p className="text-gray-400">
+                    Instant answers powered by enterprise AI.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                whileHover={{ x: 8 }}
+                className="flex items-center gap-6"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-600/20 border border-violet-500/30">
+                  📊
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-white">
+                    Smarter Hiring
+                  </h4>
+
+                  <p className="text-gray-400">
+                    Resume screening and candidate matching in seconds.
+                  </p>
+                </div>
               </motion.div>
 
             </div>
 
           </motion.div>
-         
+                    {/* RIGHT */}
+
+          <motion.div
+            initial={{ opacity: 0, x: 80 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative flex h-[700px] items-center justify-center"
+          >
+            {/* Background Glow */}
+            <motion.div
+              animate={{
+                scale: [1, 1.08, 1],
+                opacity: [0.25, 0.5, 0.25],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="absolute h-[650px] w-[650px] rounded-full bg-violet-600/20 blur-[170px]"
+            />
+
+            {/* Floating Globe */}
+            <motion.div
+              animate={{
+                y: [0, -12, 0],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="relative z-10"
+            >
+              <Image
+                src="/final globe.png"
+                alt="Augmentik Globe"
+                width={560}
+                height={560}
+                priority
+                className="drop-shadow-[0_0_70px_rgba(168,85,247,.45)] -ml-24"
+              />
+            </motion.div>
+
+            {/* Statistics Cards */}
+
+            <div className="absolute -right-12 top-1/2 z-20 flex -translate-y-1/2 flex-col gap-6">
+
+              {/* Card 1 */}
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 4, repeat: Infinity }}
+                whileHover={{ scale: 1.05 }}
+              className="w-[180px] rounded-2xl border border-violet-500/20 bg-[#24153b]/90 p-5 backdrop-blur-xl shadow-[0_0_25px_rgba(168,85,247,.18)]"
+              >
+                <h3 className="text-4xl font-black text-violet-300">
+                  35%
+                </h3>
+
+                <p className="mt-2 text-base font-semibold text-white">
+                  Faster Hiring
+                </p>
+
+                <p className="mt-1 text-xs text-gray-400">
+                  AI-powered recruitment
+                </p>
+              </motion.div>
+
+              {/* Card 2 */}
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 5, repeat: Infinity }}
+                whileHover={{ scale: 1.05 }}
+                className="w-[180px] rounded-2xl border border-violet-500/20 bg-[#24153b]/90 p-5 backdrop-blur-xl shadow-[0_0_25px_rgba(168,85,247,.18)]"
+              >
+                <h3 className="text-4xl font-black text-violet-300">
+                  90%
+                </h3>
+
+                <p className="mt-2 text-base font-semibold text-white">
+                  Less Manual Work
+                </p>
+
+                <p className="mt-1 text-xs text-gray-400">
+                  Workflow automation
+                </p>
+              </motion.div>
+
+              {/* Card 3 */}
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 4.5, repeat: Infinity }}
+                whileHover={{ scale: 1.05 }}
+              className="w-[180px] rounded-2xl border border-violet-500/20 bg-[#24153b]/90 p-5 backdrop-blur-xl shadow-[0_0_25px_rgba(168,85,247,.18)]"
+              >
+                <h3 className="text-4xl font-black text-violet-300">
+                  24/7
+                </h3>
+
+                <p className="mt-2 text-base font-semibold text-white">
+                  AI Assistant
+                </p>
+
+                <p className="mt-1 text-xs text-gray-400">
+                  Always available
+                </p>
+              </motion.div>
+
+              {/* Card 4 */}
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 5, repeat: Infinity }}
+                whileHover={{ scale: 1.05 }}
+                className="w-[180px] rounded-2xl border border-violet-500/20 bg-[#24153b]/90 p-5 backdrop-blur-xl shadow-[0_0_25px_rgba(168,85,247,.18)]"
+              >
+                <h3 className="text-4xl font-black text-violet-300">
+                  100%
+                </h3>
+
+                <p className="mt-2 text-base font-semibold text-white">
+                  Unified Platform
+                </p>
+
+                <p className="mt-1 text-xs text-gray-400">
+                  Everything together
+                </p>
+              </motion.div>
+
+            </div>
+
+          </motion.div>
+                    {/* End Right Side */}
 
         </div>
 
-        {/* Floating Orbs */}
-
-        <motion.div
-          animate={{
-            y: [0, -18, 0],
-            opacity: [0.6, 1, 0.6],
-          }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-          }}
-          className="absolute left-16 top-44 h-4 w-4 rounded-full bg-violet-400 shadow-[0_0_25px_#8b5cf6]"
-        />
-
-        <motion.div
-          animate={{
-            y: [0, 20, 0],
-            opacity: [0.5, 1, 0.5],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-          }}
-          className="absolute right-20 top-60 h-5 w-5 rounded-full bg-fuchsia-400 shadow-[0_0_30px_#d946ef]"
-        />
-
-        <motion.div
-          animate={{
-            y: [0, -15, 0],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-          }}
-          className="absolute left-1/2 bottom-12 h-3 w-3 -translate-x-1/2 rounded-full bg-violet-300 shadow-[0_0_20px_#a855f7]"
-        />
-
-        {/* Bottom Glow */}
-
-        <div className="absolute left-1/2 bottom-0 h-[260px] w-[700px] -translate-x-1/2 rounded-full bg-violet-700/10 blur-[120px]" />
-
-      </div>
+        </div>
     </section>
   );
 }
