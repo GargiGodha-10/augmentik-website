@@ -12,18 +12,20 @@ const navigateTo = (id: string) => {
 
   setTransitionOpen(true);
 
+  // Jump immediately while the screen is covered
   setTimeout(() => {
     document.getElementById(id)?.scrollIntoView({
-      behavior: "auto",
+      behavior: "instant",
       block: "start",
     });
 
     setActiveSection(id);
-  }, 850);
+  }, 100);
 
+  // Remove transition
   setTimeout(() => {
     setTransitionOpen(false);
-  }, 2200);
+  }, 1900);
 };
     
    useEffect(() => {
