@@ -85,7 +85,7 @@ export default function KnowMore() {
       </header>
 
       {/* Heading */}
-<div className="text-center pt-30 mb-16">
+<div className="text-center pt-20 mb-16">
 
 
 
