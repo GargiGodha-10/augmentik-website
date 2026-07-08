@@ -85,7 +85,7 @@ export default function KnowMore() {
       </header>
 
       {/* Heading */}
-<div className="text-center pt-20 mb-16">
+<div className="text-center pt-22 mb-16">
 
 
 
@@ -111,7 +111,7 @@ export default function KnowMore() {
 
       <motion.div
 
-        className="flex gap-8 px-10"
+        className="flex gap-8 px-8"
 
         animate={{
           x: ["0%", "-50%"],
