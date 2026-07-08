@@ -104,69 +104,27 @@ blur-[90px]
 
 {/* AUGMENTIK */}
 
+
+
 <motion.h1
-
-initial={{
-
-opacity:0,
-
-scale:.4,
-
-y:30
-
-}}
-
-animate={{
-
-opacity:1,
-
-scale:1,
-
-y:0
-
-}}
-
-transition={{
-
-duration:1,
-
-ease:"easeOut"
-
-}}
-
-className="absolute
-
-left-1/2
-
-top-1/2
-
--translate-x-1/2
-
--translate-y-1/2
-
-text-xl
-md:text-3xl
-tracking-[8px]
-font-extrabold
-
-bg-gradient-to-r
-
-from-white
-
-via-violet-300
-
-to-fuchsia-400
-
-bg-clip-text
-
-text-transparent
-
-drop-shadow-[0_0_30px_rgba(168,85,247,.8)]"
-
+  initial={{
+    opacity: 0,
+    scale: 0.7,
+    y: 20,
+  }}
+  animate={{
+    opacity: [0, 1, 1, 0],
+    scale: [0.7, 1, 1, 0.9],
+    y: [20, 0, 0, -10],
+  }}
+  transition={{
+    duration: 1.8,
+    times: [0, 0.25, 0.7, 1],
+    ease: "easeInOut",
+  }}
+  className="..."
 >
-
-AUGMENTIK
-
+  AUGMENTIK
 </motion.h1>
 
 {/* Vertical Glow */}
