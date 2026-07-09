@@ -40,31 +40,23 @@ const cards = [
     desc: "Track every candidate from screening to onboarding in one place.",
     tag: "End-to-End Workflow",
   },
-  
 ];
 
 export default function KnowMore() {
   return (
-    <main className="min-h-screen bg-[#140B26] overflow-hidden text-white">
+    <main className="min-h-screen bg-[#140B26] overflow-hidden text-white relative">
 
       {/* Background Glow */}
-
       <div className="absolute top-[-220px] left-[-180px] h-[500px] w-[500px] rounded-full bg-violet-700/20 blur-[180px]" />
-
       <div className="absolute bottom-[-180px] right-[-180px] h-[500px] w-[500px] rounded-full bg-purple-600/20 blur-[180px]" />
 
       {/* Floating Bubbles */}
-
-      <div className="absolute top-24 left-24 h-4 w-4 rounded-full bg-violet-300/40 animate-pulse"/>
-
-      <div className="absolute top-52 right-40 h-5 w-5 rounded-full bg-purple-300/30 animate-pulse"/>
-
-      <div className="absolute bottom-32 left-60 h-3 w-3 rounded-full bg-fuchsia-300/40 animate-pulse"/>
-
-      <div className="absolute bottom-24 right-24 h-6 w-6 rounded-full bg-violet-300/30 animate-pulse"/>
+      <div className="absolute top-24 left-24 h-4 w-4 rounded-full bg-violet-300/40 animate-pulse" />
+      <div className="absolute top-52 right-40 h-5 w-5 rounded-full bg-purple-300/30 animate-pulse" />
+      <div className="absolute bottom-32 left-60 h-3 w-3 rounded-full bg-fuchsia-300/40 animate-pulse" />
+      <div className="absolute bottom-24 right-24 h-6 w-6 rounded-full bg-violet-300/30 animate-pulse" />
 
       {/* Navbar */}
-
       <header className="fixed top-0 left-0 w-full h-20 bg-[#1A1035]/90 backdrop-blur-xl border-b border-violet-500/20 z-50">
 
         <div className="max-w-7xl mx-auto h-full flex items-center px-10">
@@ -76,102 +68,84 @@ export default function KnowMore() {
             height={70}
           />
 
-          <h1 className="ml-0 text-3xl font-bold bg-gradient-to-r from-white via-violet-300 to-fuchsia-300 bg-clip-text text-transparent">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-white via-violet-300 to-fuchsia-300 bg-clip-text text-transparent">
             Augmentik
           </h1>
 
         </div>
 
       </header>
-<div className="-mt-4">
-      {/* Heading */}
-<div className="text-center  mb-8">
 
+      {/* Main Content */}
+      <div className="pt-32">
 
+        {/* Heading */}
+        <div className="text-center mb-10">
 
-<h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-center leading-tight">
-  <span className="bg-gradient-to-r from-white via-violet-200 to-fuchsia-400 bg-clip-text text-transparent">
-    Explore Our Platform
-  </span>
-</h1>
+          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight leading-tight">
+            <span className="bg-gradient-to-r from-white via-violet-200 to-fuchsia-400 bg-clip-text text-transparent">
+              Explore Our Platform
+            </span>
+          </h1>
 
-  <div className="mx-auto mt-5 h-[2px] w-36 rounded-full bg-gradient-to-r from-transparent via-violet-500 to-transparent" />
+          <div className="mx-auto mt-5 h-[2px] w-36 rounded-full bg-gradient-to-r from-transparent via-violet-500 to-transparent" />
 
-  <p className="mt-5 max-w-3xl mx-auto text-lg md:text-xl leading-9 text-gray-300">
-    Experience the next generation of
-    <span className="text-violet-300 font-semibold"> AI-powered recruitment</span>,
-    where intelligent automation streamlines
-    <span className="text-white font-medium"> hiring, vendor management, candidate tracking, </span>
-    and business operations through one unified platform.
-  </p>
+          <p className="mt-6 max-w-3xl mx-auto text-lg md:text-xl leading-9 text-gray-300">
+            Experience the next generation of
+            <span className="text-violet-300 font-semibold">
+              {" "}AI-powered recruitment
+            </span>,
+            where intelligent automation streamlines
+            <span className="text-white font-medium">
+              {" "}hiring, vendor management, candidate tracking,
+            </span>
+            {" "}and business operations through one unified platform.
+          </p>
 
-</div>
+        </div>
 
-      {/* Horizontal Cards */}
+        {/* Cards */}
+        <motion.div
+          className="flex gap-8 px-8 mt-6"
+          animate={{
+            x: ["0%", "-50%"],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        >
+          {[...cards, ...cards].map((card, index) => (
+            <motion.div
+              key={index}
+              whileHover={{ scale: 1.05 }}
+              className="min-w-[300px] h-[360px] rounded-3xl bg-white/5 backdrop-blur-xl border border-violet-500/20 shadow-[0_0_30px_rgba(139,92,246,.15)] p-8 flex flex-col"
+            >
+              <div className="text-5xl">
+                {card.icon}
+              </div>
 
-      <motion.div
+              <h2 className="mt-6 text-2xl font-bold">
+                {card.title}
+              </h2>
 
-        className="flex gap-8 px-8"
+              <p className="mt-5 text-gray-300 leading-8 flex-1">
+                {card.desc}
+              </p>
 
-        animate={{
-          x: ["0%", "-50%"],
-        }}
+              <div className="mt-5">
+                <span className="px-5 py-2 rounded-full bg-violet-600/20 text-violet-200">
+                  {card.tag}
+                </span>
+              </div>
 
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: "linear",
-        }}
+            </motion.div>
+          ))}
+        </motion.div>
 
-      >
+      </div>
 
-        {[...cards, ...cards].map((card, index) => (
-
-          <motion.div
-
-            whileHover={{
-              scale: 1.05,
-            }}
-
-            key={index}
-
-            className="min-w-[300px] h-[360px] rounded-3xl bg-white/5 backdrop-blur-xl border border-violet-500/20 shadow-[0_0_30px_rgba(139,92,246,.15)] p-8 flex flex-col"
-
-          >
-
-            <div className="text-5xl">
-
-              {card.icon}
-
-            </div>
-
-            <h2 className="mt-6 text-2xl font-bold">
-
-              {card.title}
-
-            </h2>
-
-            <p className="mt-5 text-gray-300 leading-8 flex-1">
-
-              {card.desc}
-
-            </p>
-
-            <div className="mt-5">
-
-              <span className="px-5 py-2 rounded-full bg-violet-600/20 text-violet-200">
-
-                {card.tag}
-
-              </span>
-
-            </div>
-
-          </motion.div>
-
-        ))}
-      </motion.div>
-</div>
-    </main> 
+    </main>
   );
 }
