@@ -46,9 +46,15 @@ export default function Hero() {
 
           <div className="flex gap-6 mt-12">
 
-            <button className="bg-violet-600 hover:bg-violet-700 hover:scale-105 transition duration-300 px-9 py-4 rounded-xl font-semibold shadow-[0_0_40px_rgba(139,92,246,.5)]">
-              Book a Demo
-            </button>
+           <Link href="/book-demo">
+  <motion.button
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    className="rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-500 px-8 py-4 font-semibold text-white shadow-[0_0_35px_rgba(168,85,247,.5)]"
+  >
+    Book a Demo
+  </motion.button>
+</Link>
 
 <Link
   href="/explore-platform"
