@@ -4,6 +4,13 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 export default function About() {
+  const particles = Array.from({ length: 25 }, (_, i) => ({
+  id: i,
+  left: `${(i * 17) % 100}%`,
+  top: `${(i * 37) % 100}%`,
+  duration: 4 + (i % 3),
+  delay: (i % 4) * 0.5,
+}));
   return (
     <section
       id="about"
@@ -16,23 +23,23 @@ export default function About() {
 
       {/* Floating Particles */}
       <div className="absolute inset-0 overflow-hidden">
-        {[...Array(25)].map((_, i) => (
+      {particles.map((particle) => (
           <motion.div
-            key={i}
+            key={particle.id}
             className="absolute h-2 w-2 rounded-full bg-violet-300/50"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
+           style={{
+  left: particle.left,
+  top: particle.top,
+}}
             animate={{
               y: [-15, 15, -15],
               opacity: [0.2, 1, 0.2],
             }}
-            transition={{
-              duration: 4 + Math.random() * 3,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
+          transition={{
+  duration: particle.duration,
+  repeat: Infinity,
+ delay: particle.delay,
+}}
           />
         ))}
       </div>
