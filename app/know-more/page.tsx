@@ -111,7 +111,7 @@ export default function KnowMore() {
 
       <motion.div
 
-        className="flex gap-8 px-8"
+        className="flex gap-8 px-10"
 
         animate={{
           x: ["0%", "-50%"],
