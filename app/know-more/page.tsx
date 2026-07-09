@@ -83,7 +83,7 @@ export default function KnowMore() {
         </div>
 
       </header>
-<div className="-mt-o">
+<div className="-mt-8">
       {/* Heading */}
 <div className="text-center  mb-16">
 
