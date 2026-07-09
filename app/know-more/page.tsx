@@ -83,9 +83,9 @@ export default function KnowMore() {
         </div>
 
       </header>
-
+<div className="-mt-o">
       {/* Heading */}
-<div className="text-center pt-22 mb-16">
+<div className="text-center  mb-16">
 
 
 
@@ -170,9 +170,8 @@ export default function KnowMore() {
           </motion.div>
 
         ))}
-
       </motion.div>
-
-    </main>
+</div>
+    </main> 
   );
 }
