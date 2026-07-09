@@ -83,9 +83,9 @@ export default function KnowMore() {
         </div>
 
       </header>
-<div className="-mt-8">
+<div className="-mt-4">
       {/* Heading */}
-<div className="text-center  mb-16">
+<div className="text-center  mb-8">
 
 
 
@@ -95,9 +95,9 @@ export default function KnowMore() {
   </span>
 </h1>
 
-  <div className="mx-auto mt-10 h-[2px] w-36 rounded-full bg-gradient-to-r from-transparent via-violet-500 to-transparent" />
+  <div className="mx-auto mt-5 h-[2px] w-36 rounded-full bg-gradient-to-r from-transparent via-violet-500 to-transparent" />
 
-  <p className="mt-8 max-w-3xl mx-auto text-lg md:text-xl leading-9 text-gray-300">
+  <p className="mt-5 max-w-3xl mx-auto text-lg md:text-xl leading-9 text-gray-300">
     Experience the next generation of
     <span className="text-violet-300 font-semibold"> AI-powered recruitment</span>,
     where intelligent automation streamlines
