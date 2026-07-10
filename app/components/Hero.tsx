@@ -32,16 +32,15 @@ export default function Hero() {
           </p>
 
           <h1 className="text-6xl font-bold leading-tight">
-            The AI Workforce
+          Empowering  
             <br />
-            for Modern
+            Businesses with 
             <br />
-            Businesses
+            Smarter Execution
           </h1>
 
           <p className="text-gray-300 text-xl mt-7 leading-9">
-            AI-powered hiring, talent sourcing and business automation in one
-            intelligent platform.
+          Augmentik helps organizations streamline hiring, discover the right talent, and simplify workforce management through intelligent automation—all from one unified platform.
           </p>
 
           <div className="flex gap-6 mt-12">

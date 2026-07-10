@@ -11,9 +11,9 @@ const resources = [
   },
   {
     icon: "📊",
-    title: "AI Resume Score",
+    title: " Resume Score",
     description:
-      "Receive an instant ATS score with personalized suggestions to improve your resume and increase your interview chances.",
+      "Our team carefully evaluates your resume and shares your profile score at the earliest."
   },
   {
     icon: "✅",
@@ -58,18 +58,18 @@ export default function Resources() {
         <div className="text-center mb-12">
 <div className="mt-10">
   <h2 className="text-6xl font-extrabold text-center bg-gradient-to-r from-white via-violet-100 to-purple-400 bg-clip-text text-transparent leading-tight">
-    Candidate Resources
+    Resources
   </h2>
 </div>
 
           <p className="max-w-3xl mx-auto mt-8 text-center text-[20px] leading-9 font-light text-gray-300 tracking-wide">
-  Build a <span className="text-violet-300 font-medium">stronger profile</span>,
-  optimize your <span className="text-violet-300 font-medium">resume</span>,
-  and discover
+  Submit your resume, <span className="text-violet-300 font-medium"> verify your profile, </span>
+  and unlock <span className="text-violet-300 font-medium"> opportunities that  </span>
+  match 
   <span className="text-violet-300 font-medium">
-{" "}career opportunities tailor   
+{" "} you  
   </span>
-  ed to your skills with AI-powered guidance.
+ r expertise.
 </p>
 </div>
         {/* Cards */}

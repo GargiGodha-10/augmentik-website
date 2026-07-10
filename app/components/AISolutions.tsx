@@ -13,13 +13,13 @@ const cards = [
     icon: "📄",
     title: "Resume Screener",
     description:
-      "Automatically shortlist resumes in seconds using intelligent AI.",
+      "Automatically shortlist resumes using advanced screening.",
   },
   {
     icon: "💼",
     title: "Job Description AI",
     description:
-      "Generate professional and engaging job descriptions instantly.",
+      "Extract key hiring requirements from every job description."
   },
   {
     icon: "📚",
@@ -82,13 +82,12 @@ export default function Features() {
   </div>
 
   <p className="max-w-3xl mx-auto mt-5 text-lg md:text-xl text-gray-300 leading-9 font-light tracking-wide">
-    Empowering businesses with
-    <span className="text-violet-300 font-medium"> intelligent AI tools </span>
-    that simplify
-    <span className="text-violet-300 font-medium"> hiring</span>,
-    <span className="text-violet-300 font-medium"> knowledge management</span>,
-    and
-    <span className="text-violet-300 font-medium"> workforce automation</span>.
+    Streamline recruitment, 
+    <span className="text-violet-300 font-medium"> organize knowledge, </span>
+ and 
+    <span className="text-violet-300 font-medium">  automate </span>
+    <span className="text-violet-300 font-medium">  workflows </span>
+    with Artificial Intelligence.
   </p>
 
 </div>

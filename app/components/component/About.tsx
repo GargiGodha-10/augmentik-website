@@ -61,11 +61,11 @@ export default function About() {
           </p>
 
           <h2 className="mt-5 text-4xl font-black leading-tight text-white md:text-6xl">
-            Building the Future of
+            Why Businesses Choose
           </h2>
 
           <h2 className="bg-gradient-to-r from-violet-300 via-fuchsia-400 to-violet-500 bg-clip-text text-5xl font-black text-transparent md:text-6xl">
-            AI Workforces
+             Augmentik
           </h2>
 
           <p className="mx-auto mt-8 max-w-3xl text-base leading-8 text-gray-400">

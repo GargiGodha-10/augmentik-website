@@ -139,7 +139,7 @@ transition={{
 </h3>
 
 <p className="mt-5 text-[20px] leading-9 font-light tracking-wide text-gray-300">
-  Interact naturally with Auggie and receive personalized, context-aware AI responses.
+  Interact naturally with Auggie and receive personalized, context-aware responses.
 </p>
             </motion.div>
 
@@ -162,7 +162,7 @@ transition={{
 </h3>
 
 <p className="mt-5 text-[20px] leading-9 font-light tracking-wide text-gray-300">
-  Receive instant AI recommendations, suggestions and answers whenever you need them.
+  Receive instant recommendations, suggestions and answers whenever you need them.
 </p>
             </motion.div>
 
@@ -195,6 +195,7 @@ transition={{
     scale: 1,
   }}
   transition={{
+    
     duration: 1,
   }}
   viewport={{ once: true }}
@@ -204,7 +205,7 @@ transition={{
   playsInline
   className="
     relative
-    top-10
+   translate-y-24
     left-6
     z-20
     w-[600px]
@@ -243,7 +244,7 @@ transition={{
     bg-[#24153d]/90
     backdrop-blur-xl
     px-8
-    py-6
+    py-4
     shadow-[0_15px_45px_rgba(0,0,0,.35)]
     hover:border-violet-400
     hover:shadow-[0_0_45px_rgba(168,85,247,.45)]
