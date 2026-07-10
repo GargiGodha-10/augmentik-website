@@ -205,7 +205,7 @@ export default function TalkToAuggiePage() {
 
           >
 
-            <div className="relative w-[1320px] h-[600px] rounded-[34px] overflow-hidden border border-violet-500/20 bg-[#0F0C1B]/95 backdrop-blur-2xl shadow-[0_0_80px_rgba(124,58,237,.20)]">
+            <div className="relative w-[1320px] h-[700px] rounded-[34px] overflow-hidden border border-violet-500/20 bg-[#0F0C1B]/95 backdrop-blur-2xl shadow-[0_0_80px_rgba(124,58,237,.20)]">
 
               {/* top glow */}
 
@@ -261,13 +261,13 @@ export default function TalkToAuggiePage() {
 
               {/* Main Layout */}
 
-              <div className="grid grid-cols-[330px_1fr] h-[660px]">
+              <div className="grid grid-cols-[280px_1fr] h-[660px]">
 
                 {/* ================= LEFT CHAT PANEL ================= */}
 
                 <div className="border-r border-violet-500/15 p-7">
 
-                  <div className="rounded-3xl bg-[#181326] border border-violet-500/20 p-6">
+                 <div className="w-[210px] rounded-3xl bg-[#181326] border border-violet-500/20 p-5 mx-auto">
 
                     <div className="flex items-center gap-4">
 
@@ -298,7 +298,7 @@ export default function TalkToAuggiePage() {
 
                     </div>
 
-                    <div className="mt-8 rounded-2xl bg-[#21172F] border border-violet-500/10 p-5">
+                   <div className="mt-6 rounded-2xl bg-[#21172F] border border-violet-500/10 p-4">
 
                       <p className="text-gray-300 leading-8">
 
@@ -325,7 +325,7 @@ export default function TalkToAuggiePage() {
                 {/* RIGHT PANEL STARTS IN PART 3 */}
                                 {/* ================= RIGHT FAQ PANEL ================= */}
 
-                <div className="p-8">
+                <div className="px-6 py-8">
 
                   <div className="h-full rounded-[28px] bg-[#131021]/95 border border-violet-500/15 overflow-hidden">
 
