@@ -20,10 +20,10 @@ export default function Step2Page() {
   const [time, setTime] = useState("");
 
   const focusOptions = [
-    "AI Workforce",
-    "AI Hiring",
-    "Business Automation",
-    "24/7 AI Assistant",
+    "🎯 Finding Top Talent",
+    "⚙️ Managing Workforce",
+"⏱️ Reducing Manual Work",
+"⚡ Business Automation",
   ];
 
   const meetingPlatforms = [
@@ -280,8 +280,7 @@ export default function Step2Page() {
 
               <h3 className="text-2xl font-semibold mb-5">
 
-                Choose Demo Focus
-
+                What's Your Biggest Challenge?
               </h3>
 
               <div className="grid md:grid-cols-2 gap-4 mb-10">
@@ -419,17 +418,17 @@ export default function Step2Page() {
 
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-5 text-center">
 
-                  <ShieldCheck className="w-8 h-8 text-purple-300 mx-auto mb-3" />
+                  <Users className="w-8 h-8 text-purple-300 mx-auto mb-3" />
 
                   <h4 className="font-semibold">
 
-                    Enterprise Security
+                    Personalized Demo
 
                   </h4>
 
                   <p className="text-sm text-gray-400 mt-2">
 
-                    Your information is encrypted.
+                  Built around your requirements.
 
                   </p>
 
@@ -455,17 +454,17 @@ export default function Step2Page() {
 
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-5 text-center">
 
-                  <Users className="w-8 h-8 text-purple-300 mx-auto mb-3" />
+                  <ShieldCheck  className="w-8 h-8 text-purple-300 mx-auto mb-3" />
 
                   <h4 className="font-semibold">
 
-                    AI Consultant
+                    Enterprise Security
 
                   </h4>
 
                   <p className="text-sm text-gray-400 mt-2">
 
-                    Personalized guidance for your business.
+                    Your information is encrypted.
 
                   </p>
 

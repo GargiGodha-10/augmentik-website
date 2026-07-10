@@ -224,7 +224,7 @@ export default function About() {
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 4, repeat: Infinity }}
                 whileHover={{ scale: 1.05 }}
-              className="w-[180px] rounded-2xl border border-violet-500/20 bg-[#24153b]/90 p-5 backdrop-blur-xl shadow-[0_0_25px_rgba(168,85,247,.18)]"
+              className="w-[180px] rounded-2xl border border-violet-500/20 bg-[#24153b]/90 p-4 backdrop-blur-xl shadow-[0_0_25px_rgba(168,85,247,.18)]"
               >
                 <h3 className="text-4xl font-black text-violet-300">
                   35%
@@ -244,7 +244,7 @@ export default function About() {
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 5, repeat: Infinity }}
                 whileHover={{ scale: 1.05 }}
-                className="w-[180px] rounded-2xl border border-violet-500/20 bg-[#24153b]/90 p-5 backdrop-blur-xl shadow-[0_0_25px_rgba(168,85,247,.18)]"
+                className="w-[180px] rounded-2xl border border-violet-500/20 bg-[#24153b]/90 p-4 backdrop-blur-xl shadow-[0_0_25px_rgba(168,85,247,.18)]"
               >
                 <h3 className="text-4xl font-black text-violet-300">
                   90%
@@ -264,7 +264,7 @@ export default function About() {
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 4.5, repeat: Infinity }}
                 whileHover={{ scale: 1.05 }}
-              className="w-[180px] rounded-2xl border border-violet-500/20 bg-[#24153b]/90 p-5 backdrop-blur-xl shadow-[0_0_25px_rgba(168,85,247,.18)]"
+              className="w-[180px] rounded-2xl border border-violet-500/20 bg-[#24153b]/90 p-4 backdrop-blur-xl shadow-[0_0_25px_rgba(168,85,247,.18)]"
               >
                 <h3 className="text-4xl font-black text-violet-300">
                   24/7
@@ -284,7 +284,7 @@ export default function About() {
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 5, repeat: Infinity }}
                 whileHover={{ scale: 1.05 }}
-                className="w-[180px] rounded-2xl border border-violet-500/20 bg-[#24153b]/90 p-5 backdrop-blur-xl shadow-[0_0_25px_rgba(168,85,247,.18)]"
+                className="w-[180px] rounded-2xl border border-violet-500/20 bg-[#24153b]/90 p-4 backdrop-blur-xl shadow-[0_0_25px_rgba(168,85,247,.18)]"
               >
                 <h3 className="text-4xl font-black text-violet-300">
                   100%

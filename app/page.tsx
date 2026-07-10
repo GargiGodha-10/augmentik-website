@@ -5,7 +5,7 @@ import AISolutions from "./components/AISolutions";
 import Resources from "./components/Resources";
 import AIAssistant from "./components/AIAssistant";
 import About from "./components/component/About";
-
+import Footer from "./components/Footer";;
 export default function Home() {
   return (
     <main>
@@ -15,6 +15,7 @@ export default function Home() {
       <Resources/>
       <AIAssistant/>
       <About/>
+      <Footer />
 
     </main>
   );
