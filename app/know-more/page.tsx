@@ -86,15 +86,15 @@ export default function KnowMore() {
           <div className="mx-auto mt-5 h-[2px] w-36 rounded-full bg-gradient-to-r from-transparent via-violet-500 to-transparent" />
 
           <p className="mx-auto mt-6 max-w-3xl text-lg leading-9 text-gray-300">
-            Experience the next generation of
+            Experience a smarter way to 
             <span className="font-semibold text-violet-300">
-              {" "}AI-powered recruitment
+              {" "}recruit with AI-powered tools that simplify hiring
             </span>,
-            where intelligent automation streamlines
+             accelerate decision-making, 
             <span className="font-medium text-white">
-              {" "}hiring, vendor management, candidate tracking,
+              {" "} and keep your entire recruitment 
             </span>
-            {" "}and business operations through one unified platform.
+            {" "}workflow connected.
           </p>
 
         </div>

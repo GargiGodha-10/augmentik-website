@@ -3,22 +3,29 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { ChevronDown, MessageSquare } from "lucide-react";
+import { MessageSquare } from "lucide-react";
 
 export default function TalkToAuggiePage() {
-
+const chatContainerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-
+const messagesEndRef = useRef<HTMLDivElement>(null);
   const [showChat, setShowChat] = useState(false);
   const [showDashboard, setShowDashboard] = useState(false);
-
-  const [openFAQ, setOpenFAQ] = useState(0);
+const [isTyping, setIsTyping] = useState(false);
+  const [messages, setMessages] = useState<
+  { sender: "bot" | "user"; text: string }[]
+>([
+  {
+    sender: "bot",
+    text: "Hi, I'm Auggie 👋\nHow can I help you today?",
+  },
+]);
 
   const faqs = [
     {
       question: "Is Augmentik only for IT staffing companies?",
       answer:
-        "No. Augmentik is designed for staffing and recruitment firms across multiple industries. It helps recruiters manage candidates, clients, job requirements and hiring workflows from one intelligent platform.",
+        "Augmentik works best for IT staffing companies — especially those placing SAP, ServiceNow, Cloud, and Cybersecurity consultants. That said, it works for any staffing company that manages clients, vendors, candidates, and placements in a structured way.",
     },
 
     {
@@ -45,6 +52,32 @@ export default function TalkToAuggiePage() {
         "Simply schedule a demo with our team. We'll help you understand the platform, configure your workspace and get your recruitment process running smoothly.",
     },
   ];
+const handleQuestionClick = (faq: typeof faqs[number]) => {
+  // Show user's question immediately
+  setMessages((prev) => [
+    ...prev,
+    {
+      sender: "user",
+      text: faq.question,
+    },
+  ]);
+
+  // Show typing indicator
+  setIsTyping(true);
+
+  // Wait 1 second before showing answer
+  setTimeout(() => {
+    setIsTyping(false);
+
+    setMessages((prev) => [
+      ...prev,
+      {
+        sender: "bot",
+        text: faq.answer,
+      },
+    ]);
+  }, 1000);
+};
 
   useEffect(() => {
 
@@ -74,6 +107,12 @@ export default function TalkToAuggiePage() {
     };
 
   }, []);
+useEffect(() => {
+  messagesEndRef.current?.scrollIntoView({
+    behavior: "smooth",
+    block: "end",
+  });
+}, [messages]);
 
   return (
 
@@ -201,11 +240,13 @@ export default function TalkToAuggiePage() {
               duration: .8,
             }}
 
-            className="absolute inset-0 z-30 flex items-center justify-center px-12"
+        className="absolute inset-0 z-30 flex items-center justify-center px-12 overflow-hidden"
 
           >
-
-            <div className="relative w-[1320px] h-[700px] rounded-[34px] overflow-hidden border border-violet-500/20 bg-[#0F0C1B]/95 backdrop-blur-2xl shadow-[0_0_80px_rgba(124,58,237,.20)]">
+<div
+ref={chatContainerRef}
+  className="relative flex-shrink-0 w-[1320px] h-[760px] overflow-hidden rounded-[34px] ..."
+>
 
               {/* top glow */}
 
@@ -261,11 +302,11 @@ export default function TalkToAuggiePage() {
 
               {/* Main Layout */}
 
-              <div className="grid grid-cols-[280px_1fr] h-[660px]">
+             <div className="grid grid-cols-[280px_1fr] h-[580px] min-h-0 overflow-hidden">
 
                 {/* ================= LEFT CHAT PANEL ================= */}
 
-                <div className="border-r border-violet-500/15 p-7">
+              <div className="border-r border-violet-500/15 p-7 overflow-hidden">
 
                  <div className="w-[210px] rounded-3xl bg-[#181326] border border-violet-500/20 p-5 mx-auto">
 
@@ -325,9 +366,9 @@ export default function TalkToAuggiePage() {
                 {/* RIGHT PANEL STARTS IN PART 3 */}
                                 {/* ================= RIGHT FAQ PANEL ================= */}
 
-                <div className="px-6 py-8">
+              <div className="px-6 py-8 h-full overflow-hidden">
 
-                  <div className="h-full rounded-[28px] bg-[#131021]/95 border border-violet-500/15 overflow-hidden">
+          <div className="h-full min-h-0 rounded-[28px] bg-[#131021]/95 border border-violet-500/15 overflow-hidden flex flex-col">
 
                     {/* Header */}
 
@@ -350,132 +391,120 @@ export default function TalkToAuggiePage() {
                     </div>
 
                     <div className="mx-8 h-px bg-gradient-to-r from-transparent via-violet-500/30 to-transparent" />
+{/* Chat + FAQ Layout */}
+<div className="grid grid-cols-[1fr_320px] gap-8 px-8 pt-6 flex-1 min-h-0 overflow-hidden">
 
-                    {/* FAQ LIST */}
+  {/* ================= LEFT : CHAT ================= */}
 
-                    <div className="px-8 py-8 space-y-5 overflow-y-auto h-[520px]">
+  <div className="flex flex-col h-full min-h-0 overflow-hidden">
 
-                      {faqs.map((faq, index) => (
+    {/* Messages */}
 
-                        <motion.div
+ <div
+  className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden pr-4"
+>
+  <div className="space-y-5 pb-6">
 
-                          key={index}
+      {messages.map((msg, index) => (
 
-                          layout
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: .35 }}
+          className={`flex ${
+            msg.sender === "user"
+              ? "justify-end"
+              : "justify-start"
+          }`}
+        >
 
-                          transition={{
-                            duration: .35,
-                          }}
+          <div
+            className={`max-w-[75%] rounded-2xl px-5 py-4 leading-7 whitespace-pre-line ${
+              msg.sender === "user"
+                ? "bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white"
+                : "bg-[#21172F] border border-violet-500/10 text-gray-200"
+            }`}
+          >
+            {msg.text}
+          </div>
 
-                          className="rounded-2xl border border-violet-500/15 bg-white/[0.03] overflow-hidden hover:border-violet-400/40 transition-all"
+        </motion.div>
 
-                        >
+      ))}
+      {isTyping && (
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    className="flex justify-start"
+  >
+    <div className="bg-[#21172F] border border-violet-500/10 rounded-2xl px-5 py-4">
+      <div className="flex gap-2">
+        <motion.span
+          animate={{ opacity: [0.3, 1, 0.3] }}
+          transition={{ duration: 0.6, repeat: Infinity }}
+          className="w-2 h-2 rounded-full bg-violet-300"
+        />
+        <motion.span
+          animate={{ opacity: [0.3, 1, 0.3] }}
+          transition={{ duration: 0.6, delay: 0.2, repeat: Infinity }}
+          className="w-2 h-2 rounded-full bg-violet-300"
+        />
+        <motion.span
+          animate={{ opacity: [0.3, 1, 0.3] }}
+          transition={{ duration: 0.6, delay: 0.4, repeat: Infinity }}
+          className="w-2 h-2 rounded-full bg-violet-300"
+        />
+      </div>
+    </div>
+  </motion.div>
+)}
+</div>
+      <div ref={messagesEndRef} />
 
-                          <button
+    </div>
 
-                            onClick={() =>
-                              setOpenFAQ(
-                                openFAQ === index
-                                  ? -1
-                                  : index
-                              )
-                            }
+  </div>
 
-                            className="w-full flex items-center justify-between px-7 py-6 text-left"
+  {/* ================= RIGHT : QUESTIONS ================= */}
 
-                          >
+ <div className="flex flex-col h-full min-h-0 rounded-2xl bg-[#181326] border border-violet-500/15 p-4">
 
-                            <span className="text-white text-lg font-semibold pr-6 leading-8">
+    <h3 className="text-lg font-semibold text-white mb-4">
+      Frequently Asked Questions
+    </h3>
 
-                              {faq.question}
+  <div className="flex-1 overflow-y-auto min-h-0 space-y-3 pr-1">
 
-                            </span>
+      {faqs.map((faq, index) => (
 
-                            <motion.div
+        <motion.button
+          key={index}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          onClick={() => handleQuestionClick(faq)}
+          className="w-full rounded-xl border border-violet-500/15 bg-[#231B37] hover:bg-[#30224B] transition-all px-4 py-4 text-left"
+        >
 
-                              animate={{
-                                rotate:
-                                  openFAQ === index
-                                    ? 180
-                                    : 0,
-                              }}
+          <span className="text-white leading-6">
+            {faq.question}
+          </span>
 
-                              transition={{
-                                duration: .25,
-                              }}
+        </motion.button>
 
-                            >
+      ))}
 
-                              <ChevronDown
-                                size={24}
-                                className="text-violet-300"
-                              />
+    </div>
 
-                            </motion.div>
+  </div>
 
-                          </button>
-                                                    <AnimatePresence>
-
-                            {openFAQ === index && (
-
-                              <motion.div
-
-                                initial={{
-                                  height: 0,
-                                  opacity: 0,
-                                }}
-
-                                animate={{
-                                  height: "auto",
-                                  opacity: 1,
-                                }}
-
-                                exit={{
-                                  height: 0,
-                                  opacity: 0,
-                                }}
-
-                                transition={{
-                                  duration: 0.35,
-                                  ease: "easeInOut",
-                                }}
-
-                                className="overflow-hidden"
-
-                              >
-
-                                <div className="px-7 pb-7">
-
-                                  <div className="mb-5 h-px bg-gradient-to-r from-violet-500/20 via-violet-400/40 to-transparent" />
-
-                                  <p className="text-[16px] leading-8 text-gray-300">
-
-                                    {faq.answer}
-
-                                  </p>
-
-                                </div>
-
-                              </motion.div>
-
-                            )}
-
-                          </AnimatePresence>
-
-                        </motion.div>
-
-                      ))}
-
-                    </div>
-
-                  </div>
-
+</div>
                 </div>
 
               </div>
 
             </div>
-
+</div>
           </motion.div>
 
         )}
