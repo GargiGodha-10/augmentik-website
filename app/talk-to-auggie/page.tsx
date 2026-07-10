@@ -205,7 +205,7 @@ export default function TalkToAuggiePage() {
 
           >
 
-            <div className="relative w-[1320px] h-[760px] rounded-[34px] overflow-hidden border border-violet-500/20 bg-[#0F0C1B]/95 backdrop-blur-2xl shadow-[0_0_80px_rgba(124,58,237,.20)]">
+            <div className="relative w-[1320px] h-[600px] rounded-[34px] overflow-hidden border border-violet-500/20 bg-[#0F0C1B]/95 backdrop-blur-2xl shadow-[0_0_80px_rgba(124,58,237,.20)]">
 
               {/* top glow */}
 
