@@ -245,7 +245,7 @@ useEffect(() => {
           >
 <div
 ref={chatContainerRef}
-  className="relative flex-shrink-0 w-[1320px] h-[760px] overflow-hidden rounded-[34px] ..."
+  className="relative w-[1320px] h-[760px] overflow-hidden rounded-[34px] border border-violet-500/20 bg-[#0F0C1B]/95 backdrop-blur-2xl shadow-[0_0_80px_rgba(124,58,237,.20)]"
 >
 
               {/* top glow */}

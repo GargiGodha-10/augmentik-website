@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 
 const resources = [
   {
-    icon: "📄",
-    title: "Upload Resume",
+    icon: "👤",
+    title: "Candidate Onboarding",
     description:
-      "Upload your resume and let our AI analyze your skills, experience, and qualifications to match you with the right opportunities.",
+      "Ensure a smooth transition from candidate selection to successful onboarding with end-to-end support..",
   },
   {
     icon: "📊",
@@ -60,6 +60,10 @@ export default function Resources() {
   <h2 className="text-6xl font-extrabold text-center bg-gradient-to-r from-white via-violet-100 to-purple-400 bg-clip-text text-transparent leading-tight">
     Resources
   </h2>
+</div>
+{/* Purple Line */}
+<div className="flex justify-center mt-6">
+  <div className="h-1 w-28 rounded-full bg-gradient-to-r from-violet-500 via-fuchsia-500 to-violet-500 shadow-[0_0_18px_rgba(168,85,247,0.6)]"></div>
 </div>
 
           <p className="max-w-3xl mx-auto mt-8 text-center text-[20px] leading-9 font-light text-gray-300 tracking-wide">
