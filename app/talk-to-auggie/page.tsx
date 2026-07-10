@@ -205,7 +205,7 @@ export default function TalkToAuggiePage() {
 
           >
 
-            <div className="relative w-[1450px] h-[760px] rounded-[34px] overflow-hidden border border-violet-500/20 bg-[#0F0C1B]/95 backdrop-blur-2xl shadow-[0_0_80px_rgba(124,58,237,.20)]">
+            <div className="relative w-[1320px] h-[760px] rounded-[34px] overflow-hidden border border-violet-500/20 bg-[#0F0C1B]/95 backdrop-blur-2xl shadow-[0_0_80px_rgba(124,58,237,.20)]">
 
               {/* top glow */}
 
@@ -220,8 +220,8 @@ export default function TalkToAuggiePage() {
                   <Image
                     src="/final logo.png"
                     alt="Augmentik"
-                    width={54}
-                    height={54}
+                    width={70}
+                    height={70}
                     priority
                   />
 
