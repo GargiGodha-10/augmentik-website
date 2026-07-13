@@ -13,8 +13,8 @@ export default function Footer() {
 
           {/* Brand */}
           <div>
-            <h2 className="text-4xl font-bold bg-gradient-to-r from-violet-300 to-fuchsia-400 bg-clip-text text-transparent">
-              Augmentik
+            <h2    className="text-2xl font-black tracking-[1.5px] bg-gradient-to-r from-white via-violet-300 to-fuchsia-400 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(168,85,247,0.35)]">
+  Augmentik
             </h2>
 
             <p className="mt-5 text-gray-400 leading-8">
