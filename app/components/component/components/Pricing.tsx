@@ -2,7 +2,7 @@
 
 import { Check } from "lucide-react";
 import { motion } from "framer-motion";
-
+import Link from "next/link";
 
 export default function Pricing() {
   return (
@@ -134,9 +134,11 @@ export default function Pricing() {
 
     </div>
 
-  <button className="mt-8 w-full rounded-xl border border-violet-500 py-4 font-semibold transition-all duration-300 hover:bg-violet-600 hover:scale-105">
-  Book a Demo
-</button>
+<Link href="/book-demo">
+  <button className="mt-8 w-full rounded-xl border border-violet-500 py-4 font-semibold transition-all duration-300 hover:bg-violet-600 hover:scale-105 w-full">
+    Book a Demo
+  </button>
+</Link>
 
     <div className="mt-10 space-y-5">
 
