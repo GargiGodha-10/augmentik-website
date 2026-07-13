@@ -114,6 +114,18 @@ AI Assistant
 </button>
 <button
 type="button"
+onClick={() => navigateTo("pricing")}
+className={`px-5 py-2 rounded-full font-medium transition-all duration-300
+${
+activeSection === "" || activeSection === "pricing"
+?"bg-gradient-to-r from-violet-600 to-fuchsia-500 text-white shadow-[0_0_25px_rgba(168,85,247,.7)] scale-105"
+:"bg-gradient-to-r from-violet-700/40 to-purple-500/40 text-gray-300 hover:text-white hover:scale-105"
+}`}
+>
+Pricing
+</button>
+<button
+type="button"
 onClick={() => navigateTo("about")}
 className={`px-5 py-2 rounded-full font-medium transition-all duration-300
 ${
