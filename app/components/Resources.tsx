@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-
+import Image from "next/image";
 const resources = [
   {
     icon: "👤",
@@ -97,10 +97,20 @@ export default function Resources() {
               }}
               className="relative bg-[#24163F]/80 rounded-3xl p-5 border border-white/5 backdrop-blur-md hover:border-violet-500/40 hover:shadow-[0_20px_50px_rgba(168,85,247,0.35)] transition-all duration-500"
             >
+<div className="text-4xl w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-violet-600/20 to-purple-500/10 border border-violet-500/20 shadow-[0_0_20px_rgba(168,85,247,0.25)]">
 
-              <div className="text-4xl w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-violet-600/20 to-purple-500/10 border border-violet-500/20 shadow-[0_0_20px_rgba(168,85,247,0.25)]">
-                {item.icon}
-              </div>
+  {index === 0 ? (
+    <Image
+      src="/politician.png"
+      alt="Candidate Onboarding"
+      width={40}
+      height={40}
+    />
+  ) : (
+    item.icon
+  )}
+
+</div>
 
               <h3 className="mt-6 text-[24px] font-extrabold leading-tight tracking-tight bg-gradient-to-r from-white via-violet-200 to-purple-400 bg-clip-text text-transparent">
                 {item.title}

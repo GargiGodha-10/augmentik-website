@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const cards = [
   {
@@ -122,11 +123,20 @@ export default function Features() {
               hover:shadow-[0_0_35px_rgba(168,85,247,0.35)]
               transition-all duration-500"
             >
+<div className="text-4xl w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-violet-600/20 to-purple-500/10 border border-violet-500/20 shadow-[0_0_20px_rgba(168,85,247,0.25)] mb-6">
 
-              <div className="text-5xl mb-6">
-                {card.icon}
-              </div>
+  {index === 0 ? (
+    <Image
+      src="/assistant.png"
+      alt="AI Assistant"
+      width={50}
+      height={50}
+    />
+  ) : (
+    card.icon
+  )}
 
+</div>
               <h3 className="mt-6 text-[30px] font-extrabold leading-tight tracking-tight bg-gradient-to-r from-white via-violet-200 to-purple-400 bg-clip-text text-transparent">
                 {card.title}
               </h3>

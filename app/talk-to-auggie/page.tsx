@@ -9,8 +9,9 @@ export default function TalkToAuggiePage() {
 const chatContainerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 const messagesEndRef = useRef<HTMLDivElement>(null);
-  const [showChat, setShowChat] = useState(false);
-  const [showDashboard, setShowDashboard] = useState(false);
+const [showChat, setShowChat] = useState(false);
+const [showDashboard, setShowDashboard] = useState(false);
+const [showSkip, setShowSkip] = useState(false);
 const [isTyping, setIsTyping] = useState(false);
   const [messages, setMessages] = useState<
   { sender: "bot" | "user"; text: string }[]
@@ -79,34 +80,35 @@ const handleQuestionClick = (faq: typeof faqs[number]) => {
   }, 1000);
 };
 
-  useEffect(() => {
+useEffect(() => {
 
-    const timer1 = setTimeout(() => {
+  // Show Skip button after 5 seconds
+  const skipTimer = setTimeout(() => {
+    setShowSkip(true);
+  }, 5000);
 
-      setShowChat(true);
+  // Open dashboard after 10 seconds
+  const timer1 = setTimeout(() => {
+    setShowChat(true);
+  }, 10000);
 
-    }, 10000);
+  const timer2 = setTimeout(() => {
 
-    const timer2 = setTimeout(() => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
 
-      if (videoRef.current) {
+    setShowDashboard(true);
 
-        videoRef.current.pause();
+  }, 10000);
 
-      }
+  return () => {
+    clearTimeout(skipTimer);
+    clearTimeout(timer1);
+    clearTimeout(timer2);
+  };
 
-      setShowDashboard(true);
-
-    }, 10000);
-
-    return () => {
-
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-
-    };
-
-  }, []);
+}, []);
 useEffect(() => {
   messagesEndRef.current?.scrollIntoView({
     behavior: "smooth",
@@ -203,15 +205,38 @@ useEffect(() => {
             className="absolute inset-0 flex items-center z-20"
 
           >
+<video
+  ref={videoRef}
+  autoPlay
+  playsInline
+  className="w-full h-full object-contain"
+>
+  <source src="/auggie-intro.mp4" type="video/mp4" />
+</video>
+     {showSkip && (
+  <button
+    onClick={() => {
+      if (videoRef.current) {
+        videoRef.current.pause();
+      }
 
-            <video
-              ref={videoRef}
-              autoPlay
-              playsInline
-              className="w-full h-full object-contain"
-            >
-              <source src="/auggie-intro.mp4" type="video/mp4" />
-            </video>
+      setShowChat(true);
+      setShowDashboard(true);
+    }}
+    className="absolute top-8 right-8 z-50
+      px-5 py-2.5
+      rounded-full
+      bg-black/40
+      backdrop-blur-md
+      border border-white/20
+      text-white
+      font-medium
+      hover:bg-violet-600
+      transition-all duration-300"
+  >
+    Skip →
+  </button>
+)}
 
           </motion.div>
 
