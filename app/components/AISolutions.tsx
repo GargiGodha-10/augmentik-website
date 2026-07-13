@@ -140,7 +140,7 @@ export default function Features() {
               <h3 className="mt-6 text-[30px] font-extrabold leading-tight tracking-tight bg-gradient-to-r from-white via-violet-200 to-purple-400 bg-clip-text text-transparent">
                 {card.title}
               </h3>
-
+     <div className="mt-4 h-[2px] w-14 rounded-full bg-gradient-to-r from-violet-500 to-purple-400"></div>
              <p className="mt-5 text-[17px] leading-8 text-gray-300 font-light tracking-wide">
                 {card.description}
               </p>
