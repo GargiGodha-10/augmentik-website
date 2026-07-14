@@ -1,6 +1,7 @@
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import AISolutions from "./components/AISolutions";
 import Resources from "./components/Resources";
 import AIAssistant from "./components/AIAssistant";
 import Pricing from "./components/Pricing";
@@ -13,6 +14,7 @@ export default function Home() {
     <main>
       <Navbar />
 <Hero />
+<AISolutions/>
       <Resources/>
       <AIAssistant/>
       <Pricing />
