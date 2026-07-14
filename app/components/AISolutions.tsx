@@ -96,19 +96,33 @@ export default function Features() {
 
         {/* Cards */}
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4 overflow-hidden">
 
           {cards.map((card, index) => (
 
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 80 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{
-                duration: 0.7,
-                delay: index * 0.25,
-              }}
+           initial={{
+  opacity: 0,
+  x: 250,
+}}
+
+whileInView={{
+  opacity: 1,
+  x: 0,
+}}
+
+viewport={{
+  once: true,
+  amount: 0.1,
+}}
+
+transition={{
+  type: "spring",
+  stiffness: 55,
+  damping: 18,
+  delay: index * 0.35,
+}}         
               whileHover={{
                 y: -7,
                 scale: 1.03,

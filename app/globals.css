@@ -174,3 +174,9 @@ opacity:.2;
 html {
   scroll-behavior: smooth;
 }
+#hero-section,
+#ai-section{
+    will-change: transform, opacity, filter;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
