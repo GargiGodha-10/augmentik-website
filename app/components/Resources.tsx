@@ -68,7 +68,7 @@ export default function Resources() {
   const cards = [...resources, ...resources];
 
   return (
-  <section
+<section
     id="resources"
     className="relative overflow-hidden pt-16 pb-28 bg-[#140B26] text-white"
   >
@@ -94,8 +94,13 @@ export default function Resources() {
       <div className="text-center mb-12">
 
         <div className="mt-18">
-          <h2 className="text-6xl font-extrabold bg-gradient-to-r from-white via-violet-100 to-purple-400 bg-clip-text text-transparent">
-            Resources
+  
+         <h2 className="text-6xl md:text-7xl font-extrabold leading-none">
+
+            <span className="bg-gradient-to-r from-white via-violet-200 to-purple-400 bg-clip-text text-transparent">
+              Resources
+            </span>
+
           </h2>
         </div>
 

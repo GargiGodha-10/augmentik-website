@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import Hero from "./Hero";
-import AISolutions from "./AISolutions";
+import AISolutions from "./features";
 
 gsap.registerPlugin(ScrollTrigger);
 

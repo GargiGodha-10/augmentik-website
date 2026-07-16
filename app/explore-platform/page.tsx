@@ -175,7 +175,7 @@ export default function ExplorePlatform() {
   className="sticky top-20 self-start flex-shrink-0"
 >
   <img
-    src="/dashboard-laptop.png"
+    src="/ld.png"
     alt="Dashboard Laptop"
     className="w-[760px] select-none"
   />
