@@ -2,10 +2,26 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
+
 
 export default function ExplorePlatform() {
+   const router = useRouter();
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#140B26] text-white">
+      <button
+  onClick={() => router.push("/")}
+  className="fixed top-4 left-8 z-[60] flex items-center justify-center
+  w-12 h-12 rounded-full
+  bg-white/10 border border-violet-500/30 backdrop-blur-md
+  hover:bg-violet-600/30 hover:scale-110
+  transition-all duration-300"
+>
+  <ArrowLeft className="w-6 h-6 text-white" />
+</button>
+
 
       {/* Background Glow */}
       <div className="absolute top-[-220px] left-[-180px] h-[500px] w-[500px] rounded-full bg-violet-700/20 blur-[180px]" />
@@ -129,4 +145,4 @@ export default function ExplorePlatform() {
 
     </main>
   );
-}
+}                                                                                                                                                      

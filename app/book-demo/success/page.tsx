@@ -3,6 +3,8 @@
 import ConfettiExplosion from "../../ConfettiExplosion";
 import Link from "next/link";
 import Image from "next/image";
+import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   CheckCircle2,
@@ -10,8 +12,19 @@ import {
 } from "lucide-react";
 
 export default function BookingConfirmed() {
+  const router = useRouter();
   return (
     <main className="min-h-screen bg-[#17072F] text-white overflow-hidden relative">
+      <button
+  onClick={() => router.push("/book-demo/step-2")}
+  className="absolute top-8 left-8 z-50 flex items-center justify-center
+  w-12 h-12 rounded-full
+  bg-white/10 border border-violet-500/30 backdrop-blur-md
+  hover:bg-violet-600/30 hover:scale-110
+  transition-all duration-300"
+>
+  <ArrowLeft className="w-6 h-6 text-white" />
+</button>
      <ConfettiExplosion />
 
       {/* Glow */}

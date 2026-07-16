@@ -2,6 +2,9 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
+
 
 const cards = [
   {
@@ -43,6 +46,8 @@ const cards = [
 ];
 
 export default function KnowMore() {
+  const router = useRouter();
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#140B26] text-white">
 
@@ -59,6 +64,14 @@ export default function KnowMore() {
       {/* Navbar */}
       <header className="fixed top-0 left-0 z-50 h-20 w-full border-b border-violet-500/20 bg-[#1A1035]/90 backdrop-blur-xl">
         <div className="mx-auto flex h-full max-w-7xl items-center px-10">
+<button
+  onClick={() => router.push("/explore-platform")}
+  className=" -ml-40 mr-4 flex h-11 w-11 items-center justify-center rounded-full
+  bg-white/10 border border-violet-500/30 backdrop-blur-md
+  hover:bg-violet-600/30 hover:scale-110 transition-all duration-300"
+>
+  <ArrowLeft className="h-5 w-5 text-white" />
+</button>
           <Image
             src="/final logo.png"
             alt="Logo"

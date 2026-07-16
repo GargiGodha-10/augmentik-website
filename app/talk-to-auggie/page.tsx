@@ -4,8 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { MessageSquare } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
+
 
 export default function TalkToAuggiePage() {
+  const router = useRouter();
 const chatContainerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -119,6 +123,20 @@ useEffect(() => {
   return (
 
     <div className="relative h-screen w-screen overflow-hidden bg-[#12091F]">
+          <button
+      onClick={() => router.push("/#assistant")}
+      className="absolute top-6 left-6 z-[100]
+      flex h-11 w-11 items-center justify-center
+      rounded-full
+      bg-white/10
+      border border-violet-500/30
+      backdrop-blur-md
+      hover:bg-violet-600/30
+      hover:scale-110
+      transition-all duration-300"
+    >
+      <ArrowLeft className="h-5 w-5 text-white" />
+    </button>
 
       {/* Background */}
 

@@ -1,6 +1,8 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 import {
   Sparkles,
   Zap,
@@ -42,10 +44,19 @@ export default function Step2Page() {
     "04:00 PM",
     "05:00 PM",
   ];
-
+const router = useRouter();
   return (
     <main className="min-h-screen bg-[#17072F] text-white relative overflow-hidden">
-
+<button
+  onClick={() => router.push("/book-demo")}
+  className="absolute top-8 left-8 z-50 flex items-center justify-center
+  w-12 h-12 rounded-full
+  bg-white/10 border border-violet-500/30 backdrop-blur-md
+  hover:bg-violet-600/30 hover:scale-110
+  transition-all duration-300"
+>
+  <ArrowLeft className="w-6 h-6 text-white" />
+</button>
       {/* Background Blur */}
       <div className="absolute top-24 left-20 w-72 h-72 rounded-full bg-purple-600/20 blur-[140px]" />
       <div className="absolute bottom-20 right-20 w-96 h-96 rounded-full bg-pink-600/10 blur-[180px]" />
