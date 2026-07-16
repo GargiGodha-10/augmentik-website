@@ -329,11 +329,7 @@ ref={chatContainerRef}
 
                 <div className="flex items-center gap-3">
 
-                  <div className="w-3 h-3 rounded-full bg-violet-500" />
-
-                  <div className="w-3 h-3 rounded-full bg-fuchsia-500" />
-
-                  <div className="w-3 h-3 rounded-full bg-cyan-400" />
+                 
 
                 </div>
 
