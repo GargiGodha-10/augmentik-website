@@ -12,7 +12,7 @@ export default function BookDemoPage() {
     <main className="relative min-h-screen overflow-hidden bg-[#140B26] text-white">
 <button
   onClick={() => router.push("/")}
-  className="absolute top-8 left-8 z-50 flex items-center justify-center w-12 h-12 rounded-full
+  className="absolute top-6 left-8 z-50 flex items-center justify-center w-12 h-12 rounded-full
   bg-white/10 border border-violet-500/30 backdrop-blur-md
   hover:bg-violet-600/30 hover:scale-110 transition-all duration-300"
 >
@@ -41,9 +41,9 @@ export default function BookDemoPage() {
   {/* Header */}
   <div className="h-24 flex items-center border-b border-white/10">
 
-    <div className="max-w-7xl mx-auto w-full px-8">
+    <div className="w-full pl-24 pr-8">
 
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-1 -ml-4">
 
         <Image
           src="/final logo.png"

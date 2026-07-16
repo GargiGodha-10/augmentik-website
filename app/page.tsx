@@ -6,7 +6,9 @@ import Resources from "./components/Resources";
 import AIAssistant from "./components/AIAssistant";
 import Pricing from "./components/Pricing";
 import About from "./components/About";
+import Customer from "./components/Customer";
 import Footer from "./components/Footer";
+
 
 
 export default function Home() {
@@ -19,8 +21,8 @@ export default function Home() {
       <AIAssistant/>
       <Pricing />
       <About/>
+<Customer />
       <Footer />
-
     </main>
   );
 }
