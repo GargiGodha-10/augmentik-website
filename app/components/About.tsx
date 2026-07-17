@@ -247,7 +247,7 @@ export default function About() {
                 className="w-[180px] rounded-2xl border border-violet-500/20 bg-[#24153b]/90 p-4 backdrop-blur-xl shadow-[0_0_25px_rgba(168,85,247,.18)]"
               >
                 <h3 className="text-4xl font-black text-violet-300">
-                  90%
+                  70%
                 </h3>
 
                 <p className="mt-2 text-base font-semibold text-white">
