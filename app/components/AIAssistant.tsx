@@ -2,29 +2,30 @@
 
 import Link from "next/link";
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import {
-  BookOpen,
-  MessageCircle,
-  Zap,
+  Compass,
+  Bot,
+  Sparkles,
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
-/*  Card data (same text/icons as before)                             */
+/*  Card data (same text as before, icons swapped for a more polished  */
+/*  aesthetic set)                                                      */
 /* ------------------------------------------------------------------ */
 const cardsData = [
   {
-    icon: BookOpen,
+    icon: Compass,
     title: "AI Walkthroughs",
     desc: "Step-by-step AI guidance that helps users explore every feature with ease.",
   },
   {
-    icon: MessageCircle,
+    icon: Bot,
     title: "Smart Conversations",
     desc: "Interact naturally with Auggie and receive personalized, context-aware responses.",
   },
   {
-    icon: Zap,
+    icon: Sparkles,
     title: "Instant Guidance",
     desc: "Receive instant recommendations, suggestions and answers whenever you need them.",
   },
@@ -69,7 +70,7 @@ function FlipCard({ icon: Icon, title, desc, index, scrollYProgress }) {
         style={{ rotateY, transformStyle: "preserve-3d" }}
         className="relative w-full h-full"
       >
-        {/* CLOSED face (card back — same tech-frame / logo design as the Customer section cards) */}
+        {/* CLOSED face (card back — tech-frame / logo design) */}
         <div
           style={{ backfaceVisibility: "hidden" }}
           className="absolute inset-0 rounded-3xl border border-violet-400/40 bg-[#1B1233] shadow-[0_20px_60px_rgba(0,0,0,.5),0_0_45px_rgba(168,85,247,.25)] flex flex-col items-center justify-center overflow-hidden"
@@ -83,7 +84,7 @@ function FlipCard({ icon: Icon, title, desc, index, scrollYProgress }) {
           <span className="absolute bottom-4 left-4 w-4 h-4 border-b-2 border-l-2 border-violet-300/50 rounded-bl" />
           <span className="absolute bottom-4 right-4 w-4 h-4 border-b-2 border-r-2 border-violet-300/50 rounded-br" />
 
-          {/* soft glow behind logo */}
+          {/* soft static glow behind logo */}
           <div className="absolute w-40 h-40 rounded-full bg-violet-600/30 blur-[60px]" />
 
           <span className="relative text-8xl font-black bg-gradient-to-br from-white via-violet-200 to-fuchsia-400 bg-clip-text text-transparent">
@@ -112,7 +113,7 @@ function FlipCard({ icon: Icon, title, desc, index, scrollYProgress }) {
           }}
           className="absolute inset-0 rounded-3xl border border-violet-500/20 bg-white/5 backdrop-blur-xl p-7 flex flex-col justify-center hover:border-violet-400 hover:bg-white/10 hover:shadow-[0_0_35px_rgba(168,85,247,.35)] transition-all duration-300"
         >
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-600 to-fuchsia-500 flex items-center justify-center mb-5">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-600 via-violet-600 to-purple-800 flex items-center justify-center mb-5">
             <Icon size={30} />
           </div>
 
@@ -144,6 +145,15 @@ export default function AIAssistant() {
   const { scrollYProgress } = useScroll({
     target: targetRef,
     offset: ["start start", "end end"],
+  });
+
+  // Smooth + fast: spring-smoothed scroll progress over a shorter pinned
+  // distance so the animation feels fluid instead of stepped, and finishes
+  // with noticeably less scrolling.
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 300,
+    damping: 40,
+    mass: 0.4,
   });
 
   return (
@@ -297,8 +307,9 @@ export default function AIAssistant() {
         </div>
       </div>
 
-      {/* Pinned scroll cards (stacked -> spread -> open) */}
-      <div ref={targetRef} className="relative h-[350vh]">
+      {/* Pinned scroll cards (stacked -> spread -> open).
+          220vh keeps the sequence quick; smoothProgress keeps it fluid. */}
+      <div ref={targetRef} className="relative h-[220vh]">
         <div
           className="sticky w-full flex items-center justify-center overflow-hidden"
           style={{
@@ -316,7 +327,7 @@ export default function AIAssistant() {
                 title={c.title}
                 desc={c.desc}
                 index={i}
-                scrollYProgress={scrollYProgress}
+                scrollYProgress={smoothProgress}
               />
             ))}
           </div>
