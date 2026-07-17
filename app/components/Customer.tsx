@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 const reviews = [
   {
@@ -154,6 +154,15 @@ export default function Customer() {
     offset: ["start start", "end end"],
   });
 
+  // Smooth + slightly faster: spring-smoothed scroll progress over a
+  // shorter pinned distance so the animation feels fluid instead of
+  // stepped, and finishes with a bit less scrolling.
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 300,
+    damping: 40,
+    mass: 0.4,
+  });
+
   return (
     <section className="relative bg-[#140B26] overflow-x-clip">
       {/* Background Glow */}
@@ -173,10 +182,8 @@ export default function Customer() {
             Customer Reviews
           </div>
 
-            <h2 className="text-5xl md:text-6xl font-extrabold leading-none">
-            <span className="bg-gradient-to-r from-white via-violet-200 to-purple-400 bg-clip-text text-transparent">
-              What Our Clients Say
-            </span>
+          <h2 className="text-5xl font-bold text-white">
+            What Our Clients Say
           </h2>
 
           <div className="w-32 h-[3px] bg-gradient-to-r from-violet-500 to-fuchsia-500 mx-auto rounded-full mt-6 mb-6" />
@@ -189,7 +196,7 @@ export default function Customer() {
       </div>
 
       {/* Pinned scroll cards (stacked -> spread -> open) */}
-      <div ref={targetRef} className="relative h-[350vh]">
+      <div ref={targetRef} className="relative h-[260vh]">
         <div
           className="sticky w-full flex items-center justify-center overflow-hidden"
           style={{
@@ -203,7 +210,7 @@ export default function Customer() {
               key={review.name}
               review={review}
               index={i}
-              scrollYProgress={scrollYProgress}
+              scrollYProgress={smoothProgress}
             />
           ))}
         </div>
