@@ -78,7 +78,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full z-50 bg-[#311B53]/90 backdrop-blur-md border-b border-violet-500/20">
+      <nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-b from-[#0d0620]/95 via-[#150a2e]/90 to-[#1a0e38]/85 backdrop-blur-xl border-b border-fuchsia-500/10 shadow-[0_4px_30px_rgba(88,28,135,0.35)]">
         <div className="max-w-7xl mx-auto px-10 py-5 flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-1">
@@ -102,8 +102,8 @@ export default function Navbar() {
               className={`px-5 py-2 rounded-full font-medium transition-all duration-300
               ${
                 activeSection === "" || activeSection === "features"
-                  ? "bg-gradient-to-r from-violet-600 to-fuchsia-500 text-white shadow-[0_0_25px_rgba(168,85,247,.7)] scale-105"
-                  : "bg-gradient-to-r from-violet-700/40 to-purple-500/40 text-gray-300 hover:text-white hover:scale-105"
+                  ? "bg-gradient-to-r from-violet-600 via-fuchsia-500 to-purple-600 text-white shadow-[0_0_25px_rgba(217,70,239,.55)] scale-105"
+                  : "bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-violet-400/30 hover:scale-105"
               }`}
             >
               Features
@@ -115,8 +115,8 @@ export default function Navbar() {
               className={`px-5 py-2 rounded-full font-medium transition-all duration-300
               ${
                 activeSection === "" || activeSection === "resources"
-                  ? "bg-gradient-to-r from-violet-600 to-fuchsia-500 text-white shadow-[0_0_25px_rgba(168,85,247,.7)] scale-105"
-                  : "bg-gradient-to-r from-violet-700/40 to-purple-500/40 text-gray-300 hover:text-white hover:scale-105"
+                  ? "bg-gradient-to-r from-violet-600 via-fuchsia-500 to-purple-600 text-white shadow-[0_0_25px_rgba(217,70,239,.55)] scale-105"
+                  : "bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-violet-400/30 hover:scale-105"
               }`}
             >
               Resources
@@ -128,8 +128,8 @@ export default function Navbar() {
               className={`px-5 py-2 rounded-full font-medium transition-all duration-300
               ${
                 activeSection === "" || activeSection === "assistant"
-                  ? "bg-gradient-to-r from-violet-600 to-fuchsia-500 text-white shadow-[0_0_25px_rgba(168,85,247,.7)] scale-105"
-                  : "bg-gradient-to-r from-violet-700/40 to-purple-500/40 text-gray-300 hover:text-white hover:scale-105"
+                  ? "bg-gradient-to-r from-violet-600 via-fuchsia-500 to-purple-600 text-white shadow-[0_0_25px_rgba(217,70,239,.55)] scale-105"
+                  : "bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-violet-400/30 hover:scale-105"
               }`}
             >
               AI Assistant
@@ -141,8 +141,8 @@ export default function Navbar() {
               className={`px-5 py-2 rounded-full font-medium transition-all duration-300
               ${
                 activeSection === "" || activeSection === "pricing"
-                  ? "bg-gradient-to-r from-violet-600 to-fuchsia-500 text-white shadow-[0_0_25px_rgba(168,85,247,.7)] scale-105"
-                  : "bg-gradient-to-r from-violet-700/40 to-purple-500/40 text-gray-300 hover:text-white hover:scale-105"
+                  ? "bg-gradient-to-r from-violet-600 via-fuchsia-500 to-purple-600 text-white shadow-[0_0_25px_rgba(217,70,239,.55)] scale-105"
+                  : "bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-violet-400/30 hover:scale-105"
               }`}
             >
               Pricing
@@ -154,8 +154,8 @@ export default function Navbar() {
               className={`px-5 py-2 rounded-full font-medium transition-all duration-300
               ${
                 activeSection === "" || activeSection === "about"
-                  ? "bg-gradient-to-r from-violet-600 to-fuchsia-500 text-white shadow-[0_0_25px_rgba(168,85,247,.7)] scale-105"
-                  : "bg-gradient-to-r from-violet-700/40 to-purple-500/40 text-gray-300 hover:text-white hover:scale-105"
+                  ? "bg-gradient-to-r from-violet-600 via-fuchsia-500 to-purple-600 text-white shadow-[0_0_25px_rgba(217,70,239,.55)] scale-105"
+                  : "bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-violet-400/30 hover:scale-105"
               }`}
             >
               About

@@ -5,10 +5,14 @@ import confetti from "canvas-confetti";
 
 export default function ConfettiExplosion() {
   useEffect(() => {
+    let cancelled = false;
+
     const duration = 5000;
     const animationEnd = Date.now() + duration;
 
     const fire = () => {
+      if (cancelled) return;
+
       confetti({
         particleCount: 12,
         startVelocity: 18,
@@ -32,14 +36,21 @@ export default function ConfettiExplosion() {
       });
     };
 
+    // Store timeout IDs
+    const timeouts: ReturnType<typeof setTimeout>[] = [];
+
     // Fire immediately
     for (let i = 0; i < 8; i++) {
-      setTimeout(() => fire(), i * 15);
+      const id = setTimeout(() => {
+        if (!cancelled) fire();
+      }, i * 15);
+
+      timeouts.push(id);
     }
 
     // Continue raining
     const interval = setInterval(() => {
-      if (Date.now() > animationEnd) {
+      if (cancelled || Date.now() > animationEnd) {
         clearInterval(interval);
         return;
       }
@@ -47,7 +58,17 @@ export default function ConfettiExplosion() {
       fire();
     }, 70);
 
-    return () => clearInterval(interval);
+    return () => {
+      cancelled = true;
+
+      clearInterval(interval);
+
+      // Clear every pending timeout
+      timeouts.forEach(clearTimeout);
+
+      // Stop all confetti immediately
+      confetti.reset();
+    };
   }, []);
 
   return null;

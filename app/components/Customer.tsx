@@ -173,8 +173,10 @@ export default function Customer() {
             Customer Reviews
           </div>
 
-          <h2 className="text-5xl font-bold text-white">
-            What Our Clients Say
+            <h2 className="text-5xl md:text-6xl font-extrabold leading-none">
+            <span className="bg-gradient-to-r from-white via-violet-200 to-purple-400 bg-clip-text text-transparent">
+              What Our Clients Say
+            </span>
           </h2>
 
           <div className="w-32 h-[3px] bg-gradient-to-r from-violet-500 to-fuchsia-500 mx-auto rounded-full mt-6 mb-6" />
