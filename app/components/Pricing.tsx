@@ -72,9 +72,11 @@ export default function Pricing() {
 
     </div>
 
-   <button className="mt-8 w-full rounded-xl border border-violet-500 py-4 font-semibold transition-all duration-300 hover:bg-violet-600 hover:scale-105">
- Get Started
-</button>
+<Link href="/book-demo">
+  <button className="mt-8 w-full rounded-xl border border-violet-500 py-4 font-semibold transition-all duration-300 hover:bg-violet-600 hover:scale-105">
+    Get Started
+  </button>
+</Link>
 
     <div className="mt-10 space-y-5">
 
@@ -193,11 +195,13 @@ export default function Pricing() {
 
     </div>
 
-    <button className="mt-8 w-full rounded-xl border border-violet-500 py-4 font-semibold transition hover:bg-violet-600
-hover:scale-105
-duration-300">
-      Contact Us
-    </button>
+  <a href="#footer">
+  <button
+    className="mt-8 w-full rounded-xl border border-violet-500 py-4 font-semibold transition duration-300 hover:bg-violet-600 hover:scale-105"
+  >
+    Contact Us
+  </button>
+</a>
 
     <div className="mt-10 space-y-5">
 
