@@ -15,7 +15,6 @@ export default function Navbar() {
 
     setTransitionOpen(true);
 
-    // Jump immediately while the screen is covered
     setTimeout(() => {
       document.getElementById(id)?.scrollIntoView({
         behavior: "instant",
@@ -25,7 +24,6 @@ export default function Navbar() {
       setActiveSection(id);
     }, 100);
 
-    // Remove transition
     setTimeout(() => {
       setTransitionOpen(false);
     }, 1900);
@@ -38,7 +36,6 @@ export default function Navbar() {
 
     if (sections.length === 0) return;
 
-    // Track how visible each section currently is
     const visibilityMap = new Map<string, number>();
 
     const observer = new IntersectionObserver(
@@ -47,7 +44,6 @@ export default function Navbar() {
           visibilityMap.set(entry.target.id, entry.intersectionRatio);
         });
 
-        // Pick the section with the highest visible ratio right now
         let bestId = "";
         let bestRatio = 0;
 
@@ -58,14 +54,9 @@ export default function Navbar() {
           }
         });
 
-        // If nothing is meaningfully in view (e.g. still on the hero
-        // section above "features"), fall back to "" so ALL buttons
-        // light up instead of falsely highlighting one.
         setActiveSection(bestRatio > 0 ? bestId : "");
       },
       {
-        // Account for the fixed navbar height (~90px) and require the
-        // section to be reasonably in view before counting it
         rootMargin: "-100px 0px -55% 0px",
         threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
       }
@@ -102,8 +93,8 @@ export default function Navbar() {
               className={`px-5 py-2 rounded-full font-medium transition-all duration-300
               ${
                 activeSection === "" || activeSection === "features"
-                  ? "bg-gradient-to-r from-violet-600 via-fuchsia-500 to-purple-600 text-white shadow-[0_0_25px_rgba(217,70,239,.55)] scale-105"
-                  : "bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-violet-400/30 hover:scale-105"
+                  ? "bg-[#1c1330] text-white border border-violet-500 shadow-[0_0_14px_rgba(139,92,246,.35)] scale-105"
+                  : "bg-transparent border border-white/10 text-gray-400 hover:text-white hover:border-white/20 hover:scale-105"
               }`}
             >
               Features
@@ -115,8 +106,8 @@ export default function Navbar() {
               className={`px-5 py-2 rounded-full font-medium transition-all duration-300
               ${
                 activeSection === "" || activeSection === "resources"
-                  ? "bg-gradient-to-r from-violet-600 via-fuchsia-500 to-purple-600 text-white shadow-[0_0_25px_rgba(217,70,239,.55)] scale-105"
-                  : "bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-violet-400/30 hover:scale-105"
+                  ? "bg-[#1c1330] text-white border border-violet-500 shadow-[0_0_14px_rgba(139,92,246,.35)] scale-105"
+                  : "bg-transparent border border-white/10 text-gray-400 hover:text-white hover:border-white/20 hover:scale-105"
               }`}
             >
               Resources
@@ -128,8 +119,8 @@ export default function Navbar() {
               className={`px-5 py-2 rounded-full font-medium transition-all duration-300
               ${
                 activeSection === "" || activeSection === "assistant"
-                  ? "bg-gradient-to-r from-violet-600 via-fuchsia-500 to-purple-600 text-white shadow-[0_0_25px_rgba(217,70,239,.55)] scale-105"
-                  : "bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-violet-400/30 hover:scale-105"
+                  ? "bg-[#1c1330] text-white border border-violet-500 shadow-[0_0_14px_rgba(139,92,246,.35)] scale-105"
+                  : "bg-transparent border border-white/10 text-gray-400 hover:text-white hover:border-white/20 hover:scale-105"
               }`}
             >
               AI Assistant
@@ -141,8 +132,8 @@ export default function Navbar() {
               className={`px-5 py-2 rounded-full font-medium transition-all duration-300
               ${
                 activeSection === "" || activeSection === "pricing"
-                  ? "bg-gradient-to-r from-violet-600 via-fuchsia-500 to-purple-600 text-white shadow-[0_0_25px_rgba(217,70,239,.55)] scale-105"
-                  : "bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-violet-400/30 hover:scale-105"
+                  ? "bg-[#1c1330] text-white border border-violet-500 shadow-[0_0_14px_rgba(139,92,246,.35)] scale-105"
+                  : "bg-transparent border border-white/10 text-gray-400 hover:text-white hover:border-white/20 hover:scale-105"
               }`}
             >
               Pricing
@@ -154,8 +145,8 @@ export default function Navbar() {
               className={`px-5 py-2 rounded-full font-medium transition-all duration-300
               ${
                 activeSection === "" || activeSection === "about"
-                  ? "bg-gradient-to-r from-violet-600 via-fuchsia-500 to-purple-600 text-white shadow-[0_0_25px_rgba(217,70,239,.55)] scale-105"
-                  : "bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-violet-400/30 hover:scale-105"
+                  ? "bg-[#1c1330] text-white border border-violet-500 shadow-[0_0_14px_rgba(139,92,246,.35)] scale-105"
+                  : "bg-transparent border border-white/10 text-gray-400 hover:text-white hover:border-white/20 hover:scale-105"
               }`}
             >
               About
