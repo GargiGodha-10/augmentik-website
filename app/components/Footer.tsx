@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
@@ -52,15 +52,26 @@ export default function Footer() {
       <div className="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-violet-600/20 blur-[140px]" />
       <div className="relative max-w-7xl mx-auto px-6 py-20">
         <div className="grid md:grid-cols-4 gap-12">
-          {/* Brand */}
-          <div>
-            <h2  className="text-2xl font-black tracking-[1.5px] bg-gradient-to-r from-white via-violet-300 to-fuchsia-400 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(168,85,247,0.35)]">
-  Augmentik
-            </h2>
-            <p className="mt-5 text-gray-400 leading-8">
-            Built by AppCrave Technovations, Augmentik is a unified staffing operations platform crafted in India for staffing businesses ready to grow at scale.
-            </p>
-          </div>
+{/* Brand */}
+<div>
+  <div className="flex items-center gap-0">
+    <Image
+      src="/final logo.png"
+      alt="Augmentik Logo"
+      width={60}
+      height={60}
+      className="object-contain"
+    />
+
+    <h2 className="text-2xl font-black tracking-[1.5px] bg-gradient-to-r from-white via-violet-300 to-fuchsia-400 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(168,85,247,0.35)]">
+      Augmentik
+    </h2>
+  </div>
+
+  <p className="mt-5 text-gray-400 leading-8">
+    Built by AppCrave Technovations, Augmentik is a unified staffing operations platform crafted in India for staffing businesses ready to grow at scale.
+  </p>
+</div>
           {/* Quick Links */}
           <div className="md:pl-8">
             <h3 className="text-xl font-semibold mb-5">
