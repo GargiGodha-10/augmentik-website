@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
 export default function Footer() {
   return (
@@ -6,35 +9,45 @@ export default function Footer() {
   id="footer"
   className="relative overflow-visible bg-[#140529] text-white"
 >
-      {/* Curved wave divider replacing the old hard line, matching the
-          violet/fuchsia theme. Pulled up so it visibly overlaps into the
-          section above, sitting right on the seam with no gap. */}
-      <div className="absolute -top-[30px] left-0 w-full overflow-hidden leading-none pointer-events-none">
-        <svg
-          viewBox="0 0 1440 120"
-          preserveAspectRatio="none"
-          className="w-full h-[90px] sm:h-[120px]"
-        >
-          <defs>
-            <linearGradient id="footerWaveGradient" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.55" />
-              <stop offset="50%" stopColor="#d946ef" stopOpacity="0.75" />
-              <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.55" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M0,32 C240,90 480,0 720,40 C960,80 1200,10 1440,48 L1440,120 L0,120 Z"
-            fill="#140529"
+      {/* Aurora glow divider: a soft blurred color wash bridging the two
+          sections, with a crisp glowing seam-line and a few drifting
+          light particles for a premium, non-literal transition. */}
+      <div className="absolute -top-[10px] left-0 w-full h-[30px] overflow-hidden pointer-events-none">
+        {/* soft aurora wash */}
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[80px] bg-gradient-to-r from-transparent via-violet-600/30 to-transparent blur-[40px]" />
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[46px] bg-gradient-to-r from-transparent via-fuchsia-500/20 to-transparent blur-[50px]" />
+
+        {/* crisp glowing seam line */}
+        <div
+          className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[1px] bg-gradient-to-r from-transparent via-violet-300 to-transparent"
+          style={{ filter: "drop-shadow(0 0 8px rgba(217,70,239,0.8)) drop-shadow(0 0 16px rgba(139,92,246,0.55))" }}
+        />
+
+        {/* drifting light particles along the seam */}
+        {[
+          { left: "12%", size: 5, duration: 4.5, delay: 0 },
+          { left: "28%", size: 3, duration: 3.5, delay: 0.6 },
+          { left: "47%", size: 4, duration: 5, delay: 0.2 },
+          { left: "63%", size: 3, duration: 4, delay: 1 },
+          { left: "80%", size: 5, duration: 4.8, delay: 0.4 },
+          { left: "92%", size: 3, duration: 3.8, delay: 0.8 },
+        ].map((p, i) => (
+          <motion.span
+            key={i}
+            animate={{ y: [-6, 6, -6], opacity: [0.4, 1, 0.4] }}
+            transition={{ duration: p.duration, repeat: Infinity, ease: "easeInOut", delay: p.delay }}
+            style={{
+              left: p.left,
+              width: p.size,
+              height: p.size,
+              top: "50%",
+              marginTop: -p.size / 2,
+            }}
+            className="absolute rounded-full bg-fuchsia-300 shadow-[0_0_10px_3px_rgba(217,70,239,0.7)]"
           />
-          <path
-            d="M0,32 C240,90 480,0 720,40 C960,80 1200,10 1440,48"
-            fill="none"
-            stroke="url(#footerWaveGradient)"
-            strokeWidth="10"
-            style={{ filter: "drop-shadow(0 0 12px rgba(168,85,247,0.55))" }}
-          />
-        </svg>
+        ))}
       </div>
+
 
       <div className="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-violet-600/20 blur-[140px]" />
       <div className="relative max-w-7xl mx-auto px-6 py-20">
