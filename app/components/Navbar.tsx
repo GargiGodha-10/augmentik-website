@@ -70,15 +70,15 @@ export default function Navbar() {
   return (
     <>
       <nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-b from-[#0d0620]/95 via-[#150a2e]/90 to-[#1a0e38]/85 backdrop-blur-xl border-b border-fuchsia-500/10 shadow-[0_4px_30px_rgba(88,28,135,0.35)]">
-        <div className="max-w-7xl mx-auto px-10 py-5 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-10 py-3 flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center">
+          <div className="flex items-center -ml-6 md:-ml-8">
            <Image
   src="/original logo.png"
   alt="Augmentik"
   width={260}
   height={80}
-  className="w-14 h-auto object-contain"
+  className="w-60 h-auto object-contain -my-3"
   priority
 />
           </div>
