@@ -158,13 +158,13 @@ export default function Customer() {
     offset: ["start start", "end end"],
   });
 
-  // Smooth + slightly faster: spring-smoothed scroll progress over a
-  // shorter pinned distance so the animation feels fluid instead of
-  // stepped, and finishes with a bit less scrolling.
+  // Smooth + snappier: spring-smoothed scroll progress, tuned so the
+  // full stack -> spread -> flip sequence completes within roughly a
+  // single scroll gesture instead of a long, dragged-out scroll.
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 300,
-    damping: 40,
-    mass: 0.4,
+    stiffness: 420,
+    damping: 38,
+    mass: 0.25,
   });
 
   return (
@@ -202,7 +202,7 @@ export default function Customer() {
       </div>
 
       {/* Pinned scroll cards (stacked -> spread -> open) */}
-      <div ref={targetRef} className="relative h-[260vh]">
+      <div ref={targetRef} className="relative h-[150vh]">
         <div
           className="sticky w-full flex items-center justify-center overflow-hidden"
           style={{
