@@ -6,6 +6,14 @@ import { useEffect, useState } from "react";
 
 const SECTION_IDS = ["features", "resources", "assistant", "pricing", "about"];
 
+const NAV_ITEMS = [
+  { id: "features", label: "Features" },
+  { id: "resources", label: "Resources" },
+  { id: "assistant", label: "AI Assistant" },
+  { id: "pricing", label: "Pricing" },
+  { id: "about", label: "About" },
+];
+
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState("");
   const [transitionOpen, setTransitionOpen] = useState(false);
@@ -73,82 +81,48 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-10 py-3 flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center -ml-6 md:-ml-35">
-           <Image
-  src="/original logo.png"
-  alt="Augmentik"
-  width={260}
-  height={80}
-  className="w-60 h-auto object-contain -my-3"
-  priority
-/>
+            <Image
+              src="/original logo.png"
+              alt="Augmentik"
+              width={260}
+              height={80}
+              className="w-60 h-auto object-contain -my-3"
+              priority
+            />
           </div>
 
           {/* Menu */}
-          <div className="hidden md:flex items-center gap-5">
-            <button
-              type="button"
-              onClick={() => navigateTo("features")}
-              className={`px-5 py-2 rounded-full font-medium transition-all duration-300
-              ${
-                activeSection === "" || activeSection === "features"
-                  ? "bg-[#1c1330] text-white border border-violet-500 shadow-[0_0_14px_rgba(139,92,246,.35)] scale-105"
-                  : "bg-transparent border border-white/10 text-gray-400 hover:text-white hover:border-white/20 hover:scale-105"
-              }`}
-            >
-              Features
-            </button>
+          <div className="hidden md:flex items-center gap-10">
+            {NAV_ITEMS.map((item) => {
+              // Line only shows for the tab that's actually open right now —
+              // no line at all until a section becomes active, and no
+              // hover-triggered line on the others.
+              const isActive = activeSection === item.id;
 
-            <button
-              type="button"
-              onClick={() => navigateTo("resources")}
-              className={`px-5 py-2 rounded-full font-medium transition-all duration-300
-              ${
-                activeSection === "" || activeSection === "resources"
-                  ? "bg-[#1c1330] text-white border border-violet-500 shadow-[0_0_14px_rgba(139,92,246,.35)] scale-105"
-                  : "bg-transparent border border-white/10 text-gray-400 hover:text-white hover:border-white/20 hover:scale-105"
-              }`}
-            >
-              Resources
-            </button>
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => navigateTo(item.id)}
+                  className="relative py-2 text-[18px] font-medium tracking-wide transition-colors duration-300"
+                >
+                  <span
+                    className={`transition-colors duration-300 ${
+                      isActive
+                        ? "text-white [text-shadow:0_0_18px_rgba(168,85,247,.55)]"
+                        : "text-gray-300 hover:text-white"
+                    }`}
+                  >
+                    {item.label}
+                  </span>
 
-            <button
-              type="button"
-              onClick={() => navigateTo("assistant")}
-              className={`px-5 py-2 rounded-full font-medium transition-all duration-300
-              ${
-                activeSection === "" || activeSection === "assistant"
-                  ? "bg-[#1c1330] text-white border border-violet-500 shadow-[0_0_14px_rgba(139,92,246,.35)] scale-105"
-                  : "bg-transparent border border-white/10 text-gray-400 hover:text-white hover:border-white/20 hover:scale-105"
-              }`}
-            >
-              AI Assistant
-            </button>
-
-            <button
-              type="button"
-              onClick={() => navigateTo("pricing")}
-              className={`px-5 py-2 rounded-full font-medium transition-all duration-300
-              ${
-                activeSection === "" || activeSection === "pricing"
-                  ? "bg-[#1c1330] text-white border border-violet-500 shadow-[0_0_14px_rgba(139,92,246,.35)] scale-105"
-                  : "bg-transparent border border-white/10 text-gray-400 hover:text-white hover:border-white/20 hover:scale-105"
-              }`}
-            >
-              Pricing
-            </button>
-
-            <button
-              type="button"
-              onClick={() => navigateTo("about")}
-              className={`px-5 py-2 rounded-full font-medium transition-all duration-300
-              ${
-                activeSection === "" || activeSection === "about"
-                  ? "bg-[#1c1330] text-white border border-violet-500 shadow-[0_0_14px_rgba(139,92,246,.35)] scale-105"
-                  : "bg-transparent border border-white/10 text-gray-400 hover:text-white hover:border-white/20 hover:scale-105"
-              }`}
-            >
-              About
-            </button>
+                  {/* underline — only rendered for the active tab */}
+                  {isActive && (
+                    <span className="absolute left-0 -bottom-[3px] h-[2px] w-full rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 shadow-[0_0_10px_rgba(217,70,239,.65)]" />
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
       </nav>

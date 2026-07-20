@@ -30,7 +30,7 @@ export default function Hero() {
       >
         {/* Left Side */}
         <div className="max-w-2xl animate-fade text-left">
-          <p className="text-violet-400 uppercase tracking-[6px] font-semibold mb-2">
+          <p className="text-violet-400 uppercase tracking-[6px] font-semibold mb-2 pl-1">
             AI WORKFORCE PLATFORM
           </p>
 
@@ -51,14 +51,11 @@ export default function Hero() {
           </p>
 
           <div className="flex gap-6 mt-12">
-            <Link href="/book-demo">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-500 px-8 py-4 font-semibold text-white shadow-[0_0_35px_rgba(168,85,247,.5)]"
-              >
-                Book a Demo
-              </motion.button>
+            <Link
+              href="/book-demo"
+              className="border border-gray-500 hover:bg-white hover:text-black transition duration-300 px-9 py-4 rounded-xl font-semibold"
+            >
+              Book a Demo
             </Link>
 
             <Link

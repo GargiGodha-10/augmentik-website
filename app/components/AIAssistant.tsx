@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import {
@@ -70,7 +71,7 @@ function FlipCard({ icon: Icon, title, desc, index, scrollYProgress }) {
         style={{ rotateY, transformStyle: "preserve-3d" }}
         className="relative w-full h-full"
       >
-        {/* CLOSED face (card back — tech-frame / logo design) */}
+        {/* CLOSED face (card back — Augmentik logo design) */}
         <div
           style={{ backfaceVisibility: "hidden" }}
           className="absolute inset-0 rounded-3xl border border-violet-400/40 bg-[#1B1233] shadow-[0_20px_60px_rgba(0,0,0,.5),0_0_45px_rgba(168,85,247,.25)] flex flex-col items-center justify-center overflow-hidden"
@@ -85,15 +86,18 @@ function FlipCard({ icon: Icon, title, desc, index, scrollYProgress }) {
           <span className="absolute bottom-4 right-4 w-4 h-4 border-b-2 border-r-2 border-violet-300/50 rounded-br" />
 
           {/* soft static glow behind logo */}
-          <div className="absolute w-40 h-40 rounded-full bg-violet-600/30 blur-[60px]" />
+          <div className="absolute w-48 h-48 rounded-full bg-violet-600/30 blur-[60px]" />
 
-          <span className="relative text-8xl font-black bg-gradient-to-br from-white via-violet-200 to-fuchsia-400 bg-clip-text text-transparent">
-            A
-          </span>
-
-          <p className="relative mt-3 text-sm font-semibold tracking-[4px] uppercase bg-gradient-to-r from-violet-200 to-fuchsia-300 bg-clip-text text-transparent">
-            Augmentik
-          </p>
+          {/* Auggie logo */}
+          <div className="relative w-[200px] h-[200px] flex items-center justify-center">
+            <Image
+              src="/main_auggie_logo-removebg-preview.png"
+              alt="Augmentik Logo"
+              width={200}
+              height={200}
+              className="object-contain drop-shadow-[0_0_25px_rgba(168,85,247,.5)]"
+            />
+          </div>
 
           <div className="relative mt-4 flex gap-1.5">
             {Array.from({ length: 5 }).map((_, i) => (
