@@ -8,9 +8,7 @@ import {
   Compass,
   MessageCircle,
   Sparkles,
-  Paperclip,
   Send,
-  ArrowRight,
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
@@ -214,7 +212,7 @@ export default function AIAssistant() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="rounded-3xl border border-violet-500/20 bg-[#1B1233]/80 backdrop-blur-xl shadow-[0_25px_70px_rgba(0,0,0,.45)] transition-all duration-300 hover:border-violet-500 hover:shadow-[0_0_40px_rgba(168,85,247,.45)] flex flex-col overflow-hidden h-[640px]"
+            className="rounded-3xl border border-violet-500/20 bg-[#1B1233]/80 backdrop-blur-xl shadow-[0_25px_70px_rgba(0,0,0,.45)] transition-all duration-300 hover:border-violet-500 hover:shadow-[0_0_40px_rgba(168,85,247,.45)] flex flex-col overflow-hidden h-[665px]"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
@@ -322,9 +320,6 @@ export default function AIAssistant() {
             {/* Input */}
             <div className="p-4 border-t border-white/10">
               <div className="flex items-center gap-3 rounded-2xl bg-white/5 border border-white/10 px-4 py-2.5">
-                <button className="text-gray-400 hover:text-violet-300 transition-colors shrink-0">
-                  <Paperclip size={18} />
-                </button>
                 <input
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
