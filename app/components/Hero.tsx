@@ -30,7 +30,7 @@ export default function Hero() {
       >
         {/* Left Side */}
         <div className="max-w-2xl animate-fade text-left">
-          <p className="text-violet-400 uppercase tracking-[6px] font-semibold mb-5">
+          <p className="text-violet-400 uppercase tracking-[6px] font-semibold mb-2">
             AI WORKFORCE PLATFORM
           </p>
 
