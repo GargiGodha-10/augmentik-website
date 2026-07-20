@@ -13,14 +13,14 @@ export default function Hero() {
           muted
           loop
           playsInline
-          className="w-full h-full object-cover object-[center_35%]"
+          className="w-full h-full object-cover object-[center_35%] brightness-[0.60]"
         >
           <source src="/new video.mp4" type="video/mp4" />
         </video>
 
         {/* Dark overlay so text stays readable */}
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/50" />
+        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/30" />
       </div>
 
       {/* ================= FOREGROUND ================= */}
