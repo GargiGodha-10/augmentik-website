@@ -72,17 +72,15 @@ export default function Navbar() {
       <nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-b from-[#0d0620]/95 via-[#150a2e]/90 to-[#1a0e38]/85 backdrop-blur-xl border-b border-fuchsia-500/10 shadow-[0_4px_30px_rgba(88,28,135,0.35)]">
         <div className="max-w-7xl mx-auto px-10 py-5 flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center gap-1">
-            <Image
-              src="/final logo.png"
-              alt="Augmentik"
-              width={70}
-              height={70}
-              className="-mr-3"
-            />
-            <h1 className="text-2xl font-black tracking-[1.5px] bg-gradient-to-r from-white via-violet-300 to-fuchsia-400 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(168,85,247,0.35)]">
-              Augmentik
-            </h1>
+          <div className="flex items-center">
+           <Image
+  src="/original logo.png"
+  alt="Augmentik"
+  width={260}
+  height={80}
+  className="w-14 h-auto object-contain"
+  priority
+/>
           </div>
 
           {/* Menu */}

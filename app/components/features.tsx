@@ -3,6 +3,15 @@
 import { motion, useAnimationFrame } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import {
+  ScanSearch,
+  Briefcase,
+  BookOpen,
+  Users,
+  Handshake,
+  Wallet,
+  Workflow,
+} from "lucide-react";
 
 const cards = [
   {
@@ -13,49 +22,49 @@ const cards = [
       "Find the right candidates instantly using AI-powered matching.",
   },
   {
-    icon: "📄",
+    icon: ScanSearch,
     image: false,
     title: "Resume Screener",
     description:
       "Automatically shortlist resumes using advanced screening.",
   },
   {
-    icon: "💼",
+    icon: Briefcase,
     image: false,
     title: "Job Description AI",
     description:
       "Extract key hiring requirements from every job description.",
   },
   {
-    icon: "📚",
+    icon: BookOpen,
     image: false,
     title: "Knowledge Assistant",
     description:
       "Access your company's knowledge base with an AI assistant.",
   },
   {
-    icon: "👥",
+    icon: Users,
     image: false,
     title: "Client Management",
     description:
       "Manage clients, communication and projects from one place.",
   },
   {
-    icon: "🤝",
+    icon: Handshake,
     image: false,
     title: "Vendor Management",
     description:
       "Track vendors, contracts and performance efficiently.",
   },
   {
-    icon: "💰",
+    icon: Wallet,
     image: false,
     title: "Invoicing & Finance",
     description:
       "Generate invoices and monitor payments with ease.",
   },
   {
-    icon: "⚙️",
+    icon: Workflow,
     image: false,
     title: "Recruitment Workflow",
     description:
@@ -227,6 +236,7 @@ export default function Features() {
               <div
                 key={index}
                 className="
+                  group
                   min-w-[340px]
                   max-w-[340px]
                   flex-shrink-0
@@ -244,18 +254,28 @@ export default function Features() {
                   hover:shadow-[0_0_40px_rgba(168,85,247,.45)]
                 "
               >
-                <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl border border-violet-500/20 bg-gradient-to-br from-violet-600/20 to-purple-500/10 shadow-[0_0_20px_rgba(168,85,247,.25)]">
+                <motion.div
+                  className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl border border-violet-500/20 bg-gradient-to-br from-violet-600/20 to-purple-500/10 shadow-[0_0_20px_rgba(168,85,247,.25)]"
+                  whileHover={{
+                    rotate: [0, -10, 8, -4, 0],
+                    transition: { duration: 0.5, ease: "easeInOut" },
+                  }}
+                >
                   {card.image ? (
                     <Image
-                      src={card.icon}
+                      src={card.icon as string}
                       alt={card.title}
                       width={52}
                       height={52}
                     />
                   ) : (
-                    <span className="text-4xl">{card.icon}</span>
+                    <card.icon
+                      className="text-violet-300"
+                      size={30}
+                      strokeWidth={1.8}
+                    />
                   )}
-                </div>
+                </motion.div>
 
                 <h3 className="text-[30px] font-extrabold leading-tight bg-gradient-to-r from-white via-violet-200 to-purple-400 bg-clip-text text-transparent">
                   {card.title}

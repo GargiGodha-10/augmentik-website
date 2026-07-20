@@ -1,43 +1,51 @@
 "use client";
 
-import { useAnimationFrame } from "framer-motion";
+import { motion, useAnimationFrame } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import {
+  UserCheck,
+  BarChart3,
+  ShieldCheck,
+  Briefcase,
+  CalendarClock,
+  FileText,
+} from "lucide-react";
 
 const resources = [
   {
-    icon: "👤",
+    icon: UserCheck,
     image: "/politician.png",
     title: "Candidate Onboarding",
     description:
       "Ensure a smooth transition from candidate selection to successful onboarding with end-to-end support.",
   },
   {
-    icon: "📊",
+    icon: BarChart3,
     title: "Resume Score",
     description:
       "Our team carefully evaluates your resume and shares your profile score at the earliest.",
   },
   {
-    icon: "✅",
+    icon: ShieldCheck,
     title: "Profile Verification",
     description:
       "Verify your profile, skills, and experience to build credibility and stand out to recruiters.",
   },
   {
-    icon: "💼",
+    icon: Briefcase,
     title: "Job Matches",
     description:
       "Discover personalized job opportunities based on your profile, skills, experience, and career goals.",
   },
   {
-    icon: "📅",
+    icon: CalendarClock,
     title: "Interview Scheduling",
     description:
       "Schedule interviews effortlessly with automated reminders and recruiter coordination.",
   },
   {
-    icon: "📄",
+    icon: FileText,
     title: "Offer Management",
     description:
       "Receive, track and manage offers securely in one centralized place.",
@@ -219,7 +227,13 @@ export default function Resources() {
               key={index}
               className="relative flex-shrink-0 w-[330px] bg-[#24163F]/80 rounded-3xl p-6 border border-white/5 backdrop-blur-md hover:border-violet-500/40 hover:shadow-[0_20px_50px_rgba(168,85,247,0.35)] transition-all duration-500 cursor-pointer"
             >
-              <div className="text-4xl w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-violet-600/20 to-purple-500/10 border border-violet-500/20 shadow-[0_0_20px_rgba(168,85,247,0.25)]">
+              <motion.div
+                className="w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-violet-600/20 to-purple-500/10 border border-violet-500/20 shadow-[0_0_20px_rgba(168,85,247,0.25)]"
+                whileHover={{
+                  rotate: [0, -10, 8, -4, 0],
+                  transition: { duration: 0.5, ease: "easeInOut" },
+                }}
+              >
                 {item.image ? (
                   <Image
                     src={item.image}
@@ -228,9 +242,13 @@ export default function Resources() {
                     height={40}
                   />
                 ) : (
-                  item.icon
+                  <item.icon
+                    className="text-violet-300"
+                    size={26}
+                    strokeWidth={1.8}
+                  />
                 )}
-              </div>
+              </motion.div>
 
               <h3 className="mt-6 text-[24px] font-extrabold leading-tight tracking-tight bg-gradient-to-r from-white via-violet-200 to-purple-400 bg-clip-text text-transparent">
                 {item.title}
