@@ -1,6 +1,7 @@
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import WorkflowJourney from "./components/workflow-journey";
 import AISolutions from "./components/features";
 import Resources from "./components/Resources";
 import AIAssistant from "./components/AIAssistant";
@@ -16,6 +17,7 @@ export default function Home() {
     <main>
       <Navbar />
 <Hero />
+ <WorkflowJourney />
 <AISolutions/>
       <Resources/>
       <AIAssistant/>
