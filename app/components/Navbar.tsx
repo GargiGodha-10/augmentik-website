@@ -3,6 +3,7 @@
 import PageTransition from "./PageTransition";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
 
 const SECTION_IDS = ["features", "resources", "assistant", "pricing", "about"];
 
@@ -17,10 +18,12 @@ const NAV_ITEMS = [
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState("");
   const [transitionOpen, setTransitionOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const navigateTo = (id: string) => {
     if (transitionOpen) return;
 
+    setMobileOpen(false);
     setTransitionOpen(true);
 
     setTimeout(() => {
@@ -78,25 +81,22 @@ export default function Navbar() {
   return (
     <>
       <nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-b from-[#0d0620]/95 via-[#150a2e]/90 to-[#1a0e38]/85 backdrop-blur-xl border-b border-fuchsia-500/10 shadow-[0_4px_30px_rgba(88,28,135,0.35)]">
-        <div className="max-w-7xl mx-auto px-10 py-3 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 py-3 flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center -ml-6 md:-ml-35">
+          <div className="flex items-center -ml-2 sm:-ml-4 md:-ml-6 lg:-ml-[8.75rem]">
             <Image
               src="/original logo.png"
               alt="Augmentik"
               width={260}
               height={80}
-              className="w-60 h-auto object-contain -my-3"
+              className="w-40 sm:w-48 md:w-60 h-auto object-contain -my-3"
               priority
             />
           </div>
 
-          {/* Menu */}
-          <div className="hidden md:flex items-center gap-10">
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center gap-6 lg:gap-10">
             {NAV_ITEMS.map((item) => {
-              // Line only shows for the tab that's actually open right now —
-              // no line at all until a section becomes active, and no
-              // hover-triggered line on the others.
               const isActive = activeSection === item.id;
 
               return (
@@ -104,7 +104,7 @@ export default function Navbar() {
                   key={item.id}
                   type="button"
                   onClick={() => navigateTo(item.id)}
-                  className="relative py-2 text-[18px] font-medium tracking-wide transition-colors duration-300"
+                  className="relative py-2 text-[16px] lg:text-[18px] font-medium tracking-wide transition-colors duration-300"
                 >
                   <span
                     className={`transition-colors duration-300 ${
@@ -116,10 +116,47 @@ export default function Navbar() {
                     {item.label}
                   </span>
 
-                  {/* underline — only rendered for the active tab */}
                   {isActive && (
                     <span className="absolute left-0 -bottom-[3px] h-[2px] w-full rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 shadow-[0_0_10px_rgba(217,70,239,.65)]" />
                   )}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Mobile hamburger toggle */}
+          <button
+            type="button"
+            onClick={() => setMobileOpen((v) => !v)}
+            className="md:hidden p-2 text-gray-200 hover:text-white transition-colors"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          >
+            {mobileOpen ? <X size={26} /> : <Menu size={26} />}
+          </button>
+        </div>
+
+        {/* Mobile dropdown menu */}
+        <div
+          className={`md:hidden overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${
+            mobileOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
+          <div className="flex flex-col px-6 pb-5 pt-1 gap-1 border-t border-fuchsia-500/10">
+            {NAV_ITEMS.map((item) => {
+              const isActive = activeSection === item.id;
+
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => navigateTo(item.id)}
+                  className={`text-left py-3 text-[16px] font-medium tracking-wide border-b border-white/5 last:border-none transition-colors duration-300 ${
+                    isActive
+                      ? "text-white [text-shadow:0_0_18px_rgba(168,85,247,.55)]"
+                      : "text-gray-300"
+                  }`}
+                >
+                  {item.label}
                 </button>
               );
             })}
