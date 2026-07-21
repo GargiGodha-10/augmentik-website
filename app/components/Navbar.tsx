@@ -40,6 +40,22 @@ export default function Navbar() {
     }, 1900);
   };
 
+  const goHome = () => {
+    if (transitionOpen) return;
+
+    setMobileOpen(false);
+    setTransitionOpen(true);
+
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "instant" });
+      setActiveSection("");
+    }, 100);
+
+    setTimeout(() => {
+      setTransitionOpen(false);
+    }, 1900);
+  };
+
   useEffect(() => {
     const sections = SECTION_IDS.map((id) => document.getElementById(id)).filter(
       (el): el is HTMLElement => el !== null
@@ -83,7 +99,12 @@ export default function Navbar() {
       <nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-b from-[#0d0620]/95 via-[#150a2e]/90 to-[#1a0e38]/85 backdrop-blur-xl border-b border-fuchsia-500/10 shadow-[0_4px_30px_rgba(88,28,135,0.35)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 py-3 flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center -ml-2 sm:-ml-4 md:-ml-6 lg:-ml-[8.75rem]">
+          <button
+            type="button"
+            onClick={goHome}
+            className="flex items-center -ml-2 sm:-ml-4 md:-ml-6 lg:-ml-[8.75rem] cursor-pointer"
+            aria-label="Go to homepage"
+          >
             <Image
               src="/original logo.png"
               alt="Augmentik"
@@ -92,7 +113,7 @@ export default function Navbar() {
               className="w-40 sm:w-48 md:w-60 h-auto object-contain -my-3"
               priority
             />
-          </div>
+          </button>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-6 lg:gap-10">
