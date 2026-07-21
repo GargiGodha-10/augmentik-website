@@ -69,10 +69,6 @@ export default function AIAssistant() {
     if (el) el.scrollTop = el.scrollHeight;
   }, [messages, isTyping]);
 
-  // Set the welcome message's timestamp only after mounting on the client,
-  // so the server-rendered HTML and the first client render match exactly
-  // (fixes hydration mismatch — timestamps must never be computed during
-  // a render that also runs on the server).
   useEffect(() => {
     setMessages((prev) =>
       prev.map((m) => (m.id === "welcome" ? { ...m, time: timeNow() } : m))
@@ -96,9 +92,6 @@ export default function AIAssistant() {
     setIsTyping(true);
 
     try {
-      // Backend route to be implemented server-side with the Gemini API key.
-      // Expected contract: POST { message: string, history: ChatMessage[] }
-      // -> { reply: string }
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -140,14 +133,14 @@ export default function AIAssistant() {
   return (
     <section
       id="assistant"
-      className="relative overflow-x-clip bg-[#160B2C] pt-24 pb-24 text-white"
+      className="relative overflow-x-clip bg-[#160B2C] pt-16 sm:pt-20 md:pt-24 pb-16 sm:pb-20 md:pb-24 text-white"
     >
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#160B2C] via-[#241142] to-[#160B2C]" />
 
       {/* Glow */}
-      <div className="absolute -left-40 top-10 w-[450px] h-[450px] rounded-full bg-violet-600/20 blur-[170px]" />
-      <div className="absolute right-0 bottom-0 w-[500px] h-[500px] rounded-full bg-fuchsia-600/20 blur-[180px]" />
+      <div className="absolute -left-40 top-10 w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] md:w-[450px] md:h-[450px] rounded-full bg-violet-600/20 blur-[170px]" />
+      <div className="absolute right-0 bottom-0 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] rounded-full bg-fuchsia-600/20 blur-[180px]" />
 
       {/* Floating Particles */}
       <motion.div
@@ -171,8 +164,8 @@ export default function AIAssistant() {
         className="absolute bottom-28 left-[15%] w-5 h-5 rounded-full bg-purple-400 shadow-[0_0_35px_#9333ea]"
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8">
+        <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-start">
           {/* ============================= LEFT ============================= */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -180,33 +173,38 @@ export default function AIAssistant() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <p className="uppercase tracking-[7px] text-violet-400 font-semibold">
+            <p
+              className="uppercase text-violet-400 font-semibold"
+              style={{ letterSpacing: "clamp(1px, 0.8vw, 7px)", fontSize: "clamp(12px, 2vw, 16px)" }}
+            >
               AI ASSISTANT
             </p>
 
-            <h2 className="mt-2 text-6xl font-black leading-tight">
+            <h2 className="mt-2 text-4xl sm:text-5xl md:text-6xl font-black leading-tight">
               <span className="text-white">Meet </span>
               <span className="bg-gradient-to-r from-violet-300 to-fuchsia-400 bg-clip-text text-transparent">
                 Auggie
               </span>
             </h2>
 
-            <p className="mt-4 text-[19px] leading-8 font-light text-gray-300 max-w-xl">
+            <p className="mt-3 sm:mt-4 text-sm sm:text-base md:text-[19px] leading-6 sm:leading-7 md:leading-8 font-light text-gray-300 max-w-xl">
               Your intelligent assistant for smarter hiring. Get real-time
               insights, candidate matches and AI-powered recommendations in
               seconds.
             </p>
 
             {/* Feature list */}
-            <div className="mt-8 rounded-3xl border border-violet-500/20 bg-white/5 backdrop-blur-xl divide-y divide-white/10 overflow-hidden">
+            <div className="mt-6 sm:mt-8 rounded-3xl border border-violet-500/20 bg-white/5 backdrop-blur-xl divide-y divide-white/10 overflow-hidden">
               {features.map(({ icon: Icon, title, desc }) => (
-                <div key={title} className="flex gap-4 p-6">
-                  <div className="shrink-0 w-12 h-12 rounded-2xl bg-violet-600/20 border border-violet-500/30 flex items-center justify-center">
-                    <Icon size={22} className="text-violet-300" />
+                <div key={title} className="flex gap-3 sm:gap-4 p-4 sm:p-5 md:p-6">
+                  <div className="shrink-0 w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-2xl bg-violet-600/20 border border-violet-500/30 flex items-center justify-center">
+                    <Icon size={18} className="text-violet-300 sm:hidden" />
+                    <Icon size={20} className="text-violet-300 hidden sm:block md:hidden" />
+                    <Icon size={22} className="text-violet-300 hidden md:block" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white">{title}</h3>
-                    <p className="mt-1 text-[15px] leading-7 text-gray-300">
+                    <h3 className="text-base sm:text-lg font-bold text-white">{title}</h3>
+                    <p className="mt-1 text-[13px] sm:text-[14px] md:text-[15px] leading-6 sm:leading-6 md:leading-7 text-gray-300">
                       {desc}
                     </p>
                   </div>
@@ -223,12 +221,12 @@ export default function AIAssistant() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="rounded-3xl border border-violet-500/20 bg-[#1B1233]/80 backdrop-blur-xl shadow-[0_25px_70px_rgba(0,0,0,.45)] flex flex-col overflow-hidden h-[662px]"
+            className="rounded-3xl border border-violet-500/20 bg-[#1B1233]/80 backdrop-blur-xl shadow-[0_25px_70px_rgba(0,0,0,.45)] flex flex-col overflow-hidden h-[480px] sm:h-[560px] md:h-[662px]"
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
-              <div className="flex items-center gap-3">
-                <div className="relative w-12 h-12 rounded-full overflow-hidden border border-violet-400/40 bg-violet-600/20">
+            <div className="flex items-center justify-between px-4 sm:px-5 md:px-6 py-3 sm:py-4 border-b border-white/10">
+              <div className="flex items-center gap-2.5 sm:gap-3">
+                <div className="relative w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full overflow-hidden border border-violet-400/40 bg-violet-600/20">
                   <Image
                     src="/final auggie.png"
                     alt="Auggie"
@@ -237,11 +235,11 @@ export default function AIAssistant() {
                   />
                 </div>
                 <div>
-                  <h3 className="font-bold text-white leading-tight">Auggie</h3>
-                  <p className="text-sm text-gray-400 leading-tight">
+                  <h3 className="font-bold text-white leading-tight text-sm sm:text-base">Auggie</h3>
+                  <p className="text-xs sm:text-sm text-gray-400 leading-tight">
                     AI Recruiting Assistant
                   </p>
-                  <span className="mt-0.5 inline-flex items-center gap-1.5 text-xs text-emerald-400">
+                  <span className="mt-0.5 inline-flex items-center gap-1.5 text-[11px] sm:text-xs text-emerald-400">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                     Online
                   </span>
@@ -252,7 +250,7 @@ export default function AIAssistant() {
             {/* Messages */}
             <div
               ref={scrollRef}
-              className="flex-1 overflow-y-auto px-6 py-5 space-y-4 [scrollbar-width:thin]"
+              className="flex-1 overflow-y-auto px-4 sm:px-5 md:px-6 py-4 sm:py-5 space-y-3 sm:space-y-4 [scrollbar-width:thin]"
             >
               <AnimatePresence initial={false}>
                 {messages.map((m) => (
@@ -266,7 +264,7 @@ export default function AIAssistant() {
                     }`}
                   >
                     {m.role === "assistant" && (
-                      <div className="relative w-8 h-8 rounded-full overflow-hidden border border-violet-400/40 bg-violet-600/20 mr-3 shrink-0 self-end">
+                      <div className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-violet-400/40 bg-violet-600/20 mr-2.5 sm:mr-3 shrink-0 self-end">
                         <Image
                           src="/final auggie.png"
                           alt="Auggie"
@@ -277,7 +275,7 @@ export default function AIAssistant() {
                     )}
 
                     <div
-                      className={`max-w-[75%] rounded-2xl px-4 py-3 text-[15px] leading-6 ${
+                      className={`max-w-[80%] sm:max-w-[75%] rounded-2xl px-3.5 sm:px-4 py-2.5 sm:py-3 text-[13.5px] sm:text-[15px] leading-6 ${
                         m.role === "user"
                           ? "bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white"
                           : "bg-white/5 border border-white/10 text-gray-200"
@@ -285,7 +283,7 @@ export default function AIAssistant() {
                     >
                       <p>{m.content}</p>
                       <p
-                        className={`mt-1.5 text-[11px] ${
+                        className={`mt-1.5 text-[10px] sm:text-[11px] ${
                           m.role === "user" ? "text-violet-100/70" : "text-gray-500"
                         }`}
                       >
@@ -301,7 +299,7 @@ export default function AIAssistant() {
                     animate={{ opacity: 1 }}
                     className="flex justify-start"
                   >
-                    <div className="relative w-8 h-8 rounded-full overflow-hidden border border-violet-400/40 bg-violet-600/20 mr-3 shrink-0 self-end">
+                    <div className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-violet-400/40 bg-violet-600/20 mr-2.5 sm:mr-3 shrink-0 self-end">
                       <Image
                         src="/final auggie.png"
                         alt="Auggie"
@@ -309,7 +307,7 @@ export default function AIAssistant() {
                         className="object-cover"
                       />
                     </div>
-                    <div className="bg-white/5 border border-white/10 rounded-2xl px-4 py-3 flex gap-1.5 items-center">
+                    <div className="bg-white/5 border border-white/10 rounded-2xl px-3.5 sm:px-4 py-2.5 sm:py-3 flex gap-1.5 items-center">
                       {[0, 1, 2].map((i) => (
                         <motion.span
                           key={i}
@@ -329,27 +327,28 @@ export default function AIAssistant() {
             </div>
 
             {/* Input */}
-            <div className="p-4 border-t border-white/10">
-              <div className="flex items-center gap-3 rounded-2xl bg-white/5 border border-white/10 px-4 py-2.5">
+            <div className="p-3 sm:p-4 border-t border-white/10">
+              <div className="flex items-center gap-2 sm:gap-3 rounded-2xl bg-white/5 border border-white/10 px-3 sm:px-4 py-2 sm:py-2.5">
                 <input
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleKeyDown}
                   placeholder="Type your message..."
-                  className="flex-1 bg-transparent outline-none text-[15px] placeholder:text-gray-500"
+                  className="flex-1 bg-transparent outline-none text-[13.5px] sm:text-[15px] placeholder:text-gray-500 min-w-0"
                 />
                 <motion.button
                   whileHover={{ scale: 1.08 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={sendMessage}
                   disabled={!input.trim() || isTyping}
-                  className="w-9 h-9 rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 flex items-center justify-center shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 flex items-center justify-center shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
                 >
-                  <Send size={16} className="text-white" />
+                  <Send size={14} className="text-white sm:hidden" />
+                  <Send size={16} className="text-white hidden sm:block" />
                 </motion.button>
               </div>
 
-              <p className="mt-3 text-center text-xs text-gray-500 flex items-center justify-center gap-1.5">
+              <p className="mt-2.5 sm:mt-3 text-center text-[11px] sm:text-xs text-gray-500 flex items-center justify-center gap-1.5">
                 <Sparkles size={12} className="text-violet-400" />
                 Powered by Gemini AI
               </p>

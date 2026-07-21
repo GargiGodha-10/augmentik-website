@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
@@ -31,106 +31,179 @@ const reviews = [
   },
 ];
 
-// Height (in px) of your fixed navbar, so the pinned cards sit fully below
-// it instead of being clipped behind it. Adjust to match your real navbar.
-const NAV_HEIGHT = 96;
+function useViewportSize() {
+  const [size, setSize] = useState({ width: 1280, height: 800 });
+
+  useEffect(() => {
+    const update = () =>
+      setSize({ width: window.innerWidth, height: window.innerHeight });
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  return size;
+}
 
 /* ------------------------------------------------------------------ */
-/*  Single flip card                                                    */
-/*  index 0/1/2 -> left/center/right                                    */
+/*  Card width, height, spread distance, and font scale are computed    */
+/*  TOGETHER from the same viewport width AND height so that:           */
+/*   1) three cards + gaps always fit the screen width (no overlap)     */
+/*   2) the card's height never exceeds the visible sticky area         */
+/*      (no more cut-off cards on short mobile viewports)                */
+/*   3) text/icons scale down with the card instead of overflowing it   */
 /* ------------------------------------------------------------------ */
-function ReviewFlipCard({ review, index, scrollYProgress }) {
+function getResponsiveCardMetrics(width, height, navHeight) {
+  const sidePadding = width < 400 ? 10 : width < 640 ? 16 : width < 1024 ? 24 : 32;
+  const gap = width < 400 ? 8 : width < 640 ? 12 : width < 1024 ? 20 : 28;
+
+  // Width constraint: 3 cards + 2 gaps must fit inside the padded viewport.
+  const usableWidth = width - sidePadding * 2;
+  const widthBasedCardWidth = (usableWidth - gap * 2) / 3;
+
+  const aspect = 460 / 340; // original card height/width ratio
+
+  // Height constraint: card must fit inside the sticky viewing area, minus
+  // a little breathing room above/below so it isn't flush with the edges.
+  const availableHeight = height - navHeight - 48;
+  const heightBasedCardWidth = availableHeight / aspect;
+
+  const rawCardWidth = Math.min(widthBasedCardWidth, heightBasedCardWidth);
+  const cardWidth = Math.min(340, Math.max(118, rawCardWidth));
+  const cardHeight = cardWidth * aspect;
+
+  const spreadDistance = cardWidth + gap; // guarantees no overlap, ever
+  const compactDistance = cardWidth * 0.11;
+  const fontScale = Math.max(0.55, cardWidth / 340); // don't let text vanish
+
+  return { cardWidth, cardHeight, spreadDistance, compactDistance, fontScale };
+}
+
+function ReviewFlipCard({
+  review,
+  index,
+  scrollYProgress,
+  cardWidth,
+  cardHeight,
+  spreadDistance,
+  compactDistance,
+  fontScale,
+}) {
   const offset = index - 1; // -1, 0, 1
 
-  // Stage 1: stacked & compact -> spread apart (0 -> 0.25 of scroll)
-  const compactX = offset * 34;
-  const spreadX = offset * 340;
+  const compactX = offset * compactDistance;
+  const spreadX = offset * spreadDistance;
   const compactRotate = offset * 12;
   const spreadRotate = offset * 5;
 
   const x = useTransform(scrollYProgress, [0, 0.25], [compactX, spreadX]);
   const rotate = useTransform(scrollYProgress, [0, 0.25], [compactRotate, spreadRotate]);
-  const scale = useTransform(scrollYProgress, [0, 0.25], [0.8, 1]);
+  const zoomScale = useTransform(scrollYProgress, [0, 0.25], [0.8, 1]);
 
-  // Stage 2: each card flips open, staggered one after another.
-  // All flips finish by ~0.78 of scroll, leaving a "hold" buffer (0.78 -> 1)
-  // where the cards sit fully open and visible *before* the section unpins
-  // and the page is allowed to continue scrolling down.
   const flipStart = 0.3 + index * 0.12;
   const flipEnd = flipStart + 0.25;
   const rotateY = useTransform(scrollYProgress, [flipStart, flipEnd], [0, 180]);
 
+  const px = (base, min) => `${Math.max(min, base * fontScale)}px`;
+
   return (
     <motion.div
-      style={{ x, rotate, scale, zIndex: 10 - index }}
-      className="absolute w-[300px] h-[440px] sm:w-[340px] sm:h-[460px]"
+      style={{
+        x,
+        rotate,
+        scale: zoomScale,
+        zIndex: 10 - index,
+        width: cardWidth,
+        height: cardHeight,
+      }}
+      className="absolute"
     >
       <motion.div
         style={{ rotateY, transformStyle: "preserve-3d" }}
         className="relative w-full h-full"
       >
-        {/* CLOSED face (card back — Augmentik logo design) */}
+        {/* CLOSED face */}
         <div
           style={{ backfaceVisibility: "hidden" }}
           className="absolute inset-0 rounded-3xl border border-violet-400/40 bg-[#1B1233] shadow-[0_20px_60px_rgba(0,0,0,.5),0_0_45px_rgba(168,85,247,.25)] flex flex-col items-center justify-center overflow-hidden"
         >
-          {/* inner nested frame */}
           <div className="absolute inset-3 rounded-2xl border border-violet-300/20" />
 
-          {/* corner ticks */}
           <span className="absolute top-4 left-4 w-4 h-4 border-t-2 border-l-2 border-violet-300/50 rounded-tl" />
           <span className="absolute top-4 right-4 w-4 h-4 border-t-2 border-r-2 border-violet-300/50 rounded-tr" />
           <span className="absolute bottom-4 left-4 w-4 h-4 border-b-2 border-l-2 border-violet-300/50 rounded-bl" />
           <span className="absolute bottom-4 right-4 w-4 h-4 border-b-2 border-r-2 border-violet-300/50 rounded-br" />
 
-          {/* soft glow behind logo */}
-          <div className="absolute w-48 h-48 rounded-full bg-violet-600/30 blur-[60px]" />
+          <div
+            className="absolute rounded-full bg-violet-600/30 blur-[60px]"
+            style={{ width: px(190, 70), height: px(190, 70) }}
+          />
 
-          {/* Auggie logo */}
-          <div className="relative w-[200px] h-[200px] flex items-center justify-center">
+          <div
+            className="relative flex items-center justify-center"
+            style={{ width: px(190, 70), height: px(190, 70) }}
+          >
             <Image
               src="/main_auggie_logo-removebg-preview.png"
               alt="Augmentik Logo"
               width={200}
               height={200}
-              className="object-contain drop-shadow-[0_0_25px_rgba(168,85,247,.5)]"
+              className="w-full h-full object-contain drop-shadow-[0_0_25px_rgba(168,85,247,.5)]"
             />
           </div>
 
-          <div className="relative mt-4 flex gap-1.5">
+          <div className="relative mt-3 flex gap-1.5">
             {Array.from({ length: 5 }).map((_, i) => (
-              <span
-                key={i}
-                className="w-1.5 h-1.5 rounded-full bg-violet-400/60"
-              />
+              <span key={i} className="w-1.5 h-1.5 rounded-full bg-violet-400/60" />
             ))}
           </div>
         </div>
 
-        {/* OPEN face (actual review content) */}
+        {/* OPEN face — overflow-hidden keeps stars/text clipped to the rounded border */}
         <div
           style={{
             backfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
+            padding: px(28, 10),
           }}
-          className="absolute inset-0 rounded-3xl bg-[#1B1233]/80 border border-violet-500/20 backdrop-blur-xl p-8 shadow-xl flex flex-col"
+          className="absolute inset-0 rounded-3xl bg-[#1B1233]/80 border border-violet-500/20 backdrop-blur-xl shadow-xl flex flex-col overflow-hidden"
         >
-          <div className="flex text-yellow-400 text-xl mb-6">★★★★★</div>
+          <div
+            className="flex text-yellow-400 shrink-0"
+            style={{ fontSize: px(20, 9), marginBottom: px(20, 6) }}
+          >
+            ★★★★★
+          </div>
 
-          <p className="text-gray-300 leading-8 text-lg mb-8 overflow-y-auto">
+          <p
+            className="text-gray-300 overflow-y-auto"
+            style={{
+              fontSize: px(17, 9),
+              lineHeight: 1.55,
+              marginBottom: px(26, 8),
+            }}
+          >
             {review.review}
           </p>
 
-          <div className="flex items-center gap-4 mt-auto">
+          <div className="flex items-center gap-3 mt-auto shrink-0">
             <div
-              className={`w-14 h-14 rounded-full bg-gradient-to-r ${review.color} flex items-center justify-center text-white font-bold shrink-0`}
+              className={`rounded-full bg-gradient-to-r ${review.color} flex items-center justify-center text-white font-bold shrink-0`}
+              style={{ width: px(52, 26), height: px(52, 26), fontSize: px(15, 8) }}
             >
               {review.initials}
             </div>
 
-            <div>
-              <h3 className="text-white font-semibold text-xl">{review.name}</h3>
-              <p className="text-violet-300">{review.role}</p>
+            <div className="min-w-0">
+              <h3
+                className="text-white font-semibold truncate"
+                style={{ fontSize: px(19, 10) }}
+              >
+                {review.name}
+              </h3>
+              <p className="text-violet-300 truncate" style={{ fontSize: px(15, 8) }}>
+                {review.role}
+              </p>
             </div>
           </div>
         </div>
@@ -139,18 +212,6 @@ function ReviewFlipCard({ review, index, scrollYProgress }) {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Main section — heading + pinned scroll cards live in ONE section,   */
-/*  one shared background, no visible seam.                             */
-/*                                                                       */
-/*  Note: this wrapper uses `overflow-x-clip` instead of                */
-/*  `overflow-hidden`. `overflow-hidden` on an ancestor silently breaks  */
-/*  `position: sticky` (it becomes the sticky element's scroll           */
-/*  container, and since it never scrolls internally, sticky just stops  */
-/*  working). `overflow-x-clip` still clips the decorative glow blobs    */
-/*  so nothing spills outside the page, but does NOT create a scroll     */
-/*  container, so the pinned cards keep working correctly.               */
-/* ------------------------------------------------------------------ */
 export default function Customer() {
   const targetRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -158,23 +219,24 @@ export default function Customer() {
     offset: ["start start", "end end"],
   });
 
-  // Smooth + snappier: spring-smoothed scroll progress, tuned so the
-  // full stack -> spread -> flip sequence completes within roughly a
-  // single scroll gesture instead of a long, dragged-out scroll.
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 420,
     damping: 38,
     mass: 0.25,
   });
 
+  const { width, height } = useViewportSize();
+  const navHeight = width < 768 ? 72 : 96;
+
+  const { cardWidth, cardHeight, spreadDistance, compactDistance, fontScale } =
+    getResponsiveCardMetrics(width, height, navHeight);
+
   return (
     <section className="relative bg-[#140B26] overflow-x-clip">
-      {/* Background Glow */}
-      <div className="absolute top-0 left-0 w-[450px] h-[450px] rounded-full bg-violet-700/20 blur-[180px]" />
-      <div className="absolute bottom-0 right-0 w-[450px] h-[450px] rounded-full bg-purple-700/20 blur-[180px]" />
+      <div className="absolute top-0 left-0 w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] md:w-[450px] md:h-[450px] rounded-full bg-violet-700/20 blur-[180px]" />
+      <div className="absolute bottom-0 right-0 w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] md:w-[450px] md:h-[450px] rounded-full bg-purple-700/20 blur-[180px]" />
 
-      {/* Heading */}
-      <div className="max-w-7xl mx-auto px-8 relative z-10 pt-28 pb-12">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 relative z-10 pt-16 sm:pt-20 md:pt-28 pb-8 sm:pb-10 md:pb-12">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -182,32 +244,31 @@ export default function Customer() {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <div className="inline-block px-5 py-2 rounded-full bg-violet-500/10 border border-violet-500/30 text-violet-300 text-sm mb-6">
+          <div className="inline-block px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-violet-500/10 border border-violet-500/30 text-violet-300 text-xs sm:text-sm mb-5 sm:mb-6">
             Customer Reviews
           </div>
 
-            <h2 className="text-5xl md:text-6xl font-extrabold leading-none">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-extrabold leading-none">
             <span className="bg-gradient-to-r from-white via-violet-200 to-purple-400 bg-clip-text text-transparent">
               What Our Clients Say
             </span>
           </h2>
 
-          <div className="w-32 h-[3px] bg-gradient-to-r from-violet-500 to-fuchsia-500 mx-auto rounded-full mt-6 mb-6" />
+          <div className="w-20 sm:w-28 md:w-32 h-[3px] bg-gradient-to-r from-violet-500 to-fuchsia-500 mx-auto rounded-full mt-5 sm:mt-6 mb-5 sm:mb-6" />
 
-          <p className="text-gray-300 max-w-3xl mx-auto text-lg">
+          <p className="text-gray-300 max-w-3xl mx-auto text-sm sm:text-base md:text-lg">
             Trusted by staffing leaders to streamline recruitment,
             improve productivity and make smarter business decisions.
           </p>
         </motion.div>
       </div>
 
-      {/* Pinned scroll cards (stacked -> spread -> open) */}
       <div ref={targetRef} className="relative h-[150vh]">
         <div
           className="sticky w-full flex items-center justify-center overflow-hidden"
           style={{
-            top: `${NAV_HEIGHT}px`,
-            height: `calc(100vh - ${NAV_HEIGHT}px)`,
+            top: `${navHeight}px`,
+            height: `calc(100vh - ${navHeight}px)`,
             perspective: "1800px",
           }}
         >
@@ -217,6 +278,11 @@ export default function Customer() {
               review={review}
               index={i}
               scrollYProgress={smoothProgress}
+              cardWidth={cardWidth}
+              cardHeight={cardHeight}
+              spreadDistance={spreadDistance}
+              compactDistance={compactDistance}
+              fontScale={fontScale}
             />
           ))}
         </div>

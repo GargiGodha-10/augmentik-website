@@ -164,13 +164,13 @@ export default function Features() {
   return (
     <section
       id="features"
-      className="relative overflow-hidden pt-30 pb-20 bg-[#140B26] text-white"
+      className="relative overflow-hidden pt-20 sm:pt-24 md:pt-30 pb-14 sm:pb-16 md:pb-20 bg-[#140B26] text-white"
     >
       {/* Background Glow */}
 
-      <div className="absolute top-0 left-0 h-[500px] w-[500px] rounded-full bg-violet-700/20 blur-[180px]" />
+      <div className="absolute top-0 left-0 h-[280px] w-[280px] sm:h-[400px] sm:w-[400px] md:h-[500px] md:w-[500px] rounded-full bg-violet-700/20 blur-[180px]" />
 
-      <div className="absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-purple-600/20 blur-[180px]" />
+      <div className="absolute bottom-0 right-0 h-[280px] w-[280px] sm:h-[400px] sm:w-[400px] md:h-[500px] md:w-[500px] rounded-full bg-purple-600/20 blur-[180px]" />
 
       {/* Floating Bubbles */}
 
@@ -186,18 +186,18 @@ export default function Features() {
       <div className="relative">
         {/* Heading */}
 
-        <div className="text-center mb-10 max-w-7xl mx-auto px-8">
-          <h2 className="text-6xl md:text-7xl font-extrabold leading-none">
+        <div className="text-center mb-8 sm:mb-10 max-w-7xl mx-auto px-6 sm:px-8">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-none">
             <span className="bg-gradient-to-r from-white via-violet-200 to-purple-400 bg-clip-text text-transparent">
               Features
             </span>
           </h2>
 
           <div className="flex justify-center mt-3 mb-4">
-            <div className="h-1 w-28 rounded-full bg-gradient-to-r from-violet-500 via-fuchsia-500 to-purple-500 shadow-[0_0_20px_rgba(168,85,247,.8)]" />
+            <div className="h-1 w-20 sm:w-28 rounded-full bg-gradient-to-r from-violet-500 via-fuchsia-500 to-purple-500 shadow-[0_0_20px_rgba(168,85,247,.8)]" />
           </div>
 
-          <p className="mx-auto mt-1 max-w-3xl text-lg leading-9 text-gray-300">
+          <p className="mx-auto mt-1 max-w-3xl text-sm sm:text-base md:text-lg leading-7 sm:leading-8 md:leading-9 text-gray-300">
             Streamline recruitment,
             <span className="font-medium text-violet-300"> organize knowledge </span>
             and
@@ -208,7 +208,7 @@ export default function Features() {
 
         {/* Moving Cards — full width, edge-to-edge, native scroll + drag */}
         <div
-          className="relative w-full pt-8 pb-6"
+          className="relative w-full pt-6 sm:pt-8 pb-4 sm:pb-6"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
@@ -230,28 +230,34 @@ export default function Features() {
             onScroll={() => {
               if (!isDragging.current) wrapIfNeeded();
             }}
-            className="flex gap-6 w-full overflow-x-auto cursor-grab active:cursor-grabbing px-4 md:px-8 select-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex gap-4 sm:gap-5 md:gap-6 w-full overflow-x-auto cursor-grab active:cursor-grabbing px-4 md:px-8 select-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {loopCards.map((card, index) => (
               <div
                 key={index}
                 className="
                   group
-                  min-w-[340px]
-                  max-w-[340px]
+                  min-w-[240px]
+                  max-w-[240px]
+                  sm:min-w-[290px]
+                  sm:max-w-[290px]
+                  md:min-w-[340px]
+                  md:max-w-[340px]
                   flex-shrink-0
                   rounded-3xl
                   border border-violet-500/20
                   bg-gradient-to-br
                   from-[#24163F]
                   to-[#2F1A4D]
-                  p-8
+                  p-5
+                  sm:p-6
+                  md:p-8
                   backdrop-blur-xl
                   shadow-lg
                 "
               >
                 <motion.div
-                  className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl border border-violet-500/20 bg-gradient-to-br from-violet-600/20 to-purple-500/10 shadow-[0_0_20px_rgba(168,85,247,.25)]"
+                  className="mb-4 sm:mb-5 flex h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 items-center justify-center rounded-2xl border border-violet-500/20 bg-gradient-to-br from-violet-600/20 to-purple-500/10 shadow-[0_0_20px_rgba(168,85,247,.25)]"
                   whileHover={{
                     rotate: [0, -10, 8, -4, 0],
                     transition: { duration: 0.5, ease: "easeInOut" },
@@ -261,25 +267,25 @@ export default function Features() {
                     <Image
                       src={card.icon as string}
                       alt={card.title}
-                      width={52}
-                      height={52}
+                      width={40}
+                      height={40}
+                      className="w-8 h-8 sm:w-10 sm:h-10 md:w-[52px] md:h-[52px]"
                     />
                   ) : (
                     <card.icon
-                      className="text-violet-300"
-                      size={30}
+                      className="text-violet-300 w-6 h-6 sm:w-7 sm:h-7 md:w-[30px] md:h-[30px]"
                       strokeWidth={1.8}
                     />
                   )}
                 </motion.div>
 
-                <h3 className="text-[30px] font-extrabold leading-tight bg-gradient-to-r from-white via-violet-200 to-purple-400 bg-clip-text text-transparent">
+                <h3 className="text-[20px] sm:text-[24px] md:text-[30px] font-extrabold leading-tight bg-gradient-to-r from-white via-violet-200 to-purple-400 bg-clip-text text-transparent">
                   {card.title}
                 </h3>
 
-                <div className="mt-4 h-[2px] w-16 rounded-full bg-gradient-to-r from-violet-500 to-purple-400" />
+                <div className="mt-3 sm:mt-4 h-[2px] w-12 sm:w-16 rounded-full bg-gradient-to-r from-violet-500 to-purple-400" />
 
-                <p className="mt-4 text-[17px] leading-8 text-gray-300">
+                <p className="mt-3 sm:mt-4 text-[13.5px] sm:text-[15px] md:text-[17px] leading-6 sm:leading-7 md:leading-8 text-gray-300">
                   {card.description}
                 </p>
               </div>
