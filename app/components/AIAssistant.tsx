@@ -131,10 +131,10 @@ export default function AIAssistant() {
   };
 
   return (
-    <section
-      id="assistant"
-      className="relative overflow-x-clip bg-[#160B2C] pt-16 sm:pt-20 md:pt-24 pb-16 sm:pb-20 md:pb-24 text-white"
-    >
+  <section
+  id="assistant"
+   className="relative overflow-x-clip bg-[#160B2C] scroll-mt-16 md:scroll-mt-20 lg:scroll-mt-24 pt-16 sm:pt-20 md:pt-24 pb-16 sm:pb-20 md:pb-24 text-white"
+>
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#160B2C] via-[#241142] to-[#160B2C]" />
 
