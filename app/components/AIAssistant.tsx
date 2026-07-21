@@ -9,6 +9,7 @@ import {
   MessageCircle,
   Sparkles,
   Send,
+  ArrowRight,
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
@@ -44,12 +45,7 @@ type ChatMessage = {
 };
 
 function timeNow() {
-  const date = new Date();
-  let hours = date.getHours();
-  const minutes = date.getMinutes().toString().padStart(2, "0");
-  const ampm = hours >= 12 ? "AM" : "PM";
-  hours = hours % 12 || 12;
-  return `${hours}:${minutes} ${ampm}`;
+  return new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 }
 
 const initialMessages: ChatMessage[] = [
@@ -58,7 +54,7 @@ const initialMessages: ChatMessage[] = [
     role: "assistant",
     content:
       "Hi! I'm Auggie, your AI recruiting assistant. Ask me anything about Augmentk.",
-    time: timeNow(),
+    time: "",
   },
 ];
 
@@ -72,6 +68,16 @@ export default function AIAssistant() {
     const el = scrollRef.current;
     if (el) el.scrollTop = el.scrollHeight;
   }, [messages, isTyping]);
+
+  // Set the welcome message's timestamp only after mounting on the client,
+  // so the server-rendered HTML and the first client render match exactly
+  // (fixes hydration mismatch — timestamps must never be computed during
+  // a render that also runs on the server).
+  useEffect(() => {
+    setMessages((prev) =>
+      prev.map((m) => (m.id === "welcome" ? { ...m, time: timeNow() } : m))
+    );
+  }, []);
 
   const sendMessage = async () => {
     const text = input.trim();
@@ -217,7 +223,7 @@ export default function AIAssistant() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="rounded-3xl border border-violet-500/20 bg-[#1B1233]/80 backdrop-blur-xl shadow-[0_25px_70px_rgba(0,0,0,.45)] transition-all duration-300 hover:border-violet-500 hover:shadow-[0_0_40px_rgba(168,85,247,.45)] flex flex-col overflow-hidden h-[665px]"
+            className="rounded-3xl border border-violet-500/20 bg-[#1B1233]/80 backdrop-blur-xl shadow-[0_25px_70px_rgba(0,0,0,.45)] flex flex-col overflow-hidden h-[662px]"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">

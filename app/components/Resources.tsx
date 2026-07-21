@@ -225,7 +225,7 @@ export default function Resources() {
           {cards.map((item, index) => (
             <div
               key={index}
-              className="relative flex-shrink-0 w-[330px] bg-[#24163F]/80 rounded-3xl p-6 border border-white/5 backdrop-blur-md hover:border-violet-500/40 hover:shadow-[0_20px_50px_rgba(168,85,247,0.35)] transition-all duration-500 cursor-pointer"
+              className="relative flex-shrink-0 w-[330px] bg-[#24163F]/80 rounded-3xl p-6 backdrop-blur-md cursor-pointer"
             >
               <motion.div
                 className="w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-violet-600/20 to-purple-500/10 border border-violet-500/20 shadow-[0_0_20px_rgba(168,85,247,0.25)]"

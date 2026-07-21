@@ -248,10 +248,6 @@ export default function Features() {
                   p-8
                   backdrop-blur-xl
                   shadow-lg
-                  transition-all
-                  duration-300
-                  hover:border-violet-500
-                  hover:shadow-[0_0_40px_rgba(168,85,247,.45)]
                 "
               >
                 <motion.div
