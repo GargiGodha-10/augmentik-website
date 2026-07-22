@@ -53,7 +53,7 @@ const initialMessages: ChatMessage[] = [
     id: "welcome",
     role: "assistant",
     content:
-      "Hi! I'm Auggie, your AI recruiting assistant. Ask me anything about Augmentk.",
+      "Hi! I'm Auggie, your AI recruiting assistant. Ask me anything about Augmentik.",
     time: "",
   },
 ];
