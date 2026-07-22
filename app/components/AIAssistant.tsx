@@ -4,35 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Compass,
-  MessageCircle,
-  Sparkles,
-  Send,
-  ArrowRight,
-} from "lucide-react";
-
-/* ------------------------------------------------------------------ */
-/*  Left-side feature list (same copy as before, now a stacked list     */
-/*  instead of flip cards)                                              */
-/* ------------------------------------------------------------------ */
-const features = [
-  {
-    icon: Compass,
-    title: "AI Walkthroughs",
-    desc: "Step-by-step AI guidance that helps users explore every feature with ease.",
-  },
-  {
-    icon: MessageCircle,
-    title: "Smart Conversations",
-    desc: "Interact naturally with Auggie and receive personalized, context-aware responses.",
-  },
-  {
-    icon: Sparkles,
-    title: "Instant Guidance",
-    desc: "Receive instant recommendations, suggestions and answers whenever you need them.",
-  },
-];
+import { Sparkles, Send, ArrowRight } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
 /*  Chat message type + initial greeting                                */
@@ -193,26 +165,22 @@ export default function AIAssistant() {
               seconds.
             </p>
 
-            {/* Feature list */}
-            <div className="mt-6 sm:mt-8 rounded-3xl border border-violet-500/20 bg-white/5 backdrop-blur-xl divide-y divide-white/10 overflow-hidden">
-              {features.map(({ icon: Icon, title, desc }) => (
-                <div key={title} className="flex gap-3 sm:gap-4 p-4 sm:p-5 md:p-6">
-                  <div className="shrink-0 w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-2xl bg-violet-600/20 border border-violet-500/30 flex items-center justify-center">
-                    <Icon size={18} className="text-violet-300 sm:hidden" />
-                    <Icon size={20} className="text-violet-300 hidden sm:block md:hidden" />
-                    <Icon size={22} className="text-violet-300 hidden md:block" />
-                  </div>
-                  <div>
-                    <h3 className="text-base sm:text-lg font-bold text-white">{title}</h3>
-                    <p className="mt-1 text-[13px] sm:text-[14px] md:text-[15px] leading-6 sm:leading-6 md:leading-7 text-gray-300">
-                      {desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
+            {/* Mascot */}
+            <div className="mt-10 sm:mt-12 flex flex-col items-center lg:items-start">
+              <div className="relative w-full max-w-[460px] sm:max-w-[540px] lg:max-w-[600px]">
+                {/* ambient glow */}
+                <div className="absolute inset-0 scale-90 rounded-full bg-gradient-to-tr from-violet-600/30 via-fuchsia-500/20 to-transparent blur-3xl" />
 
-      
+                <Image
+                  src="/108.jpeg"
+                  alt="Auggie, the Augmentik AI mascot"
+                  width={1200}
+                  height={1200}
+                  priority
+                  className="relative z-10 w-full h-auto object-contain rounded-3xl border border-white/10 shadow-[0_25px_60px_rgba(88,28,255,0.35)]"
+                />
+              </div>
+            </div>
           </motion.div>
 
           {/* ============================= RIGHT (chat) ============================= */}
