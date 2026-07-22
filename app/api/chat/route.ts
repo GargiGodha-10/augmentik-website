@@ -1,18 +1,39 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
-
+import fs from "fs";
+import path from "path";
 // This file only ever runs on the server (Next.js Route Handler), so the
 // API key is never bundled into client JS or visible in the browser.
 const apiKey = process.env.GEMINI_API_KEY;
 
 const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
 
-const SYSTEM_INSTRUCTION =
-  "You are Auggie, the friendly AI recruiting assistant inside the Augmentik " +
-  "staffing platform. Help users with hiring, candidate search, resume " +
-  "screening, and workforce management questions. Keep answers concise, " +
-  "practical, and professional, formatted for a chat bubble (short " +
-  "paragraphs, no long markdown documents).";
+
+const knowledgePath = path.join(process.cwd(), "app", "knowledge");
+
+function loadKnowledge() {
+  const files = [
+    "company.md",
+    "modules.md",
+    "workflows.md",
+    "faqs.md",
+    "glossary.md",
+    "system_profile.md",
+  ];
+
+  return files
+    .map(file => {
+      const content = fs.readFileSync(
+        path.join(knowledgePath, file),
+        "utf8"
+      );
+
+      return `### ${file}\n${content}`;
+    })
+    .join("\n\n");
+}
+
+const KNOWLEDGE = loadKnowledge();
 
 type ChatHistoryItem = {
   role: "user" | "assistant";
@@ -61,7 +82,7 @@ export async function POST(req: NextRequest) {
       model: "gemini-3.5-flash",
       contents,
       config: {
-        systemInstruction: SYSTEM_INSTRUCTION,
+        systemInstruction: KNOWLEDGE,
       },
     });
 

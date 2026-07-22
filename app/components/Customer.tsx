@@ -46,35 +46,39 @@ function useViewportSize() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Card width, height, spread distance, and font scale are computed    */
-/*  TOGETHER from the same viewport width AND height so that:           */
-/*   1) three cards + gaps always fit the screen width (no overlap)     */
-/*   2) the card's height never exceeds the visible sticky area         */
-/*      (no more cut-off cards on short mobile viewports)                */
-/*   3) text/icons scale down with the card instead of overflowing it   */
+/*  Card metrics.                                                       */
 /* ------------------------------------------------------------------ */
-function getResponsiveCardMetrics(width, height, navHeight) {
-  const sidePadding = width < 400 ? 10 : width < 640 ? 16 : width < 1024 ? 24 : 32;
-  const gap = width < 400 ? 8 : width < 640 ? 12 : width < 1024 ? 20 : 28;
+function getResponsiveCardMetrics(width, height, navHeight, isMobile) {
+  const aspect = 460 / 340;
+  const availableHeight = height - navHeight - 48;
 
-  // Width constraint: 3 cards + 2 gaps must fit inside the padded viewport.
+  if (isMobile) {
+    const sidePadding = width < 400 ? 16 : 24;
+    const usableWidth = width - sidePadding * 2;
+    const heightBasedWidth = availableHeight / aspect;
+
+    const rawCardWidth = Math.min(usableWidth, heightBasedWidth);
+    const cardWidth = Math.min(380, Math.max(220, rawCardWidth));
+    const cardHeight = cardWidth * aspect;
+    const fontScale = Math.max(0.75, cardWidth / 340);
+
+    return { cardWidth, cardHeight, spreadDistance: 0, compactDistance: 0, fontScale };
+  }
+
+  const sidePadding = width < 1024 ? 24 : 32;
+  const gap = width < 1024 ? 20 : 28;
+
   const usableWidth = width - sidePadding * 2;
   const widthBasedCardWidth = (usableWidth - gap * 2) / 3;
-
-  const aspect = 460 / 340; // original card height/width ratio
-
-  // Height constraint: card must fit inside the sticky viewing area, minus
-  // a little breathing room above/below so it isn't flush with the edges.
-  const availableHeight = height - navHeight - 48;
   const heightBasedCardWidth = availableHeight / aspect;
 
   const rawCardWidth = Math.min(widthBasedCardWidth, heightBasedCardWidth);
   const cardWidth = Math.min(340, Math.max(118, rawCardWidth));
   const cardHeight = cardWidth * aspect;
 
-  const spreadDistance = cardWidth + gap; // guarantees no overlap, ever
+  const spreadDistance = cardWidth + gap;
   const compactDistance = cardWidth * 0.11;
-  const fontScale = Math.max(0.55, cardWidth / 340); // don't let text vanish
+  const fontScale = Math.max(0.55, cardWidth / 340);
 
   return { cardWidth, cardHeight, spreadDistance, compactDistance, fontScale };
 }
@@ -82,27 +86,81 @@ function getResponsiveCardMetrics(width, height, navHeight) {
 function ReviewFlipCard({
   review,
   index,
+  total,
   scrollYProgress,
   cardWidth,
   cardHeight,
   spreadDistance,
   compactDistance,
   fontScale,
+  isMobile,
 }) {
-  const offset = index - 1; // -1, 0, 1
+  const offset = index - 1;
 
+  /* --------------------------- Desktop transforms --------------------------- */
   const compactX = offset * compactDistance;
   const spreadX = offset * spreadDistance;
   const compactRotate = offset * 12;
   const spreadRotate = offset * 5;
 
-  const x = useTransform(scrollYProgress, [0, 0.25], [compactX, spreadX]);
-  const rotate = useTransform(scrollYProgress, [0, 0.25], [compactRotate, spreadRotate]);
-  const zoomScale = useTransform(scrollYProgress, [0, 0.25], [0.8, 1]);
+  const desktopX = useTransform(scrollYProgress, [0, 0.25], [compactX, spreadX]);
+  const desktopRotate = useTransform(scrollYProgress, [0, 0.25], [compactRotate, spreadRotate]);
+  const desktopScale = useTransform(scrollYProgress, [0, 0.25], [0.8, 1]);
 
   const flipStart = 0.3 + index * 0.12;
   const flipEnd = flipStart + 0.25;
-  const rotateY = useTransform(scrollYProgress, [flipStart, flipEnd], [0, 180]);
+  const desktopRotateY = useTransform(scrollYProgress, [flipStart, flipEnd], [0, 180]);
+
+  /* --------------------------- Mobile transforms ----------------------------- */
+  // Each card gets its own window of the scroll range. The FIRST card is
+  // already fully in place the moment the section arrives in view (no
+  // entrance dip — this fixes the "empty space at first" bug). Later cards
+  // slide/fade in, then flip open slowly and hold, then hand off cleanly.
+  const isFirst = index === 0;
+  const isLast = index === total - 1;
+
+  const winLength = 1 / total;
+  const winStart = index * winLength;
+  const activeSpan = winLength * 0.68; // fully visible/interactive portion
+  const gap = winLength - activeSpan; // dead zone before next card begins
+
+  // Entrance: skipped for the first card so it's visible at scroll = 0.
+  const enterStart = winStart;
+  const enterEnd = winStart + activeSpan * 0.22;
+
+  // Flip: given a much bigger share of the window so it reads as a smooth,
+  // deliberate reveal rather than a snap.
+  const flipStartM = isFirst ? winStart + activeSpan * 0.08 : enterEnd;
+  const flipEndM = flipStartM + activeSpan * 0.5;
+
+  const exitStart = winStart + activeSpan;
+  const exitEnd = Math.min(1, exitStart + gap * 0.9);
+
+  const slideDistance = cardHeight * 0.55;
+
+  const mobileOpacity = useTransform(
+    scrollYProgress,
+    [enterStart, enterEnd, exitStart, exitEnd],
+    isFirst ? [1, 1, 1, isLast ? 1 : 0] : [0, 1, 1, isLast ? 1 : 0]
+  );
+  const mobileY = useTransform(
+    scrollYProgress,
+    [enterStart, enterEnd, exitStart, exitEnd],
+    isFirst ? [0, 0, 0, isLast ? 0 : -slideDistance] : [slideDistance, 0, 0, isLast ? 0 : -slideDistance]
+  );
+  const mobileScale = useTransform(
+    scrollYProgress,
+    [enterStart, enterEnd],
+    isFirst ? [1, 1] : [0.88, 1]
+  );
+  const mobileRotateY = useTransform(scrollYProgress, [flipStartM, flipEndM], [0, 180]);
+
+  const x = isMobile ? 0 : desktopX;
+  const rotate = isMobile ? 0 : desktopRotate;
+  const scale = isMobile ? mobileScale : desktopScale;
+  const y = isMobile ? mobileY : 0;
+  const opacity = isMobile ? mobileOpacity : 1;
+  const rotateY = isMobile ? mobileRotateY : desktopRotateY;
 
   const px = (base, min) => `${Math.max(min, base * fontScale)}px`;
 
@@ -110,9 +168,11 @@ function ReviewFlipCard({
     <motion.div
       style={{
         x,
+        y,
         rotate,
-        scale: zoomScale,
-        zIndex: 10 - index,
+        scale,
+        opacity,
+        zIndex: isMobile ? 10 + index : 10 - index,
         width: cardWidth,
         height: cardHeight,
       }}
@@ -159,7 +219,7 @@ function ReviewFlipCard({
           </div>
         </div>
 
-        {/* OPEN face — overflow-hidden keeps stars/text clipped to the rounded border */}
+        {/* OPEN face */}
         <div
           style={{
             backfaceVisibility: "hidden",
@@ -220,16 +280,17 @@ export default function Customer() {
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 420,
-    damping: 38,
-    mass: 0.25,
+    stiffness: 300,
+    damping: 42,
+    mass: 0.3,
   });
 
   const { width, height } = useViewportSize();
-  const navHeight = width < 768 ? 72 : 96;
+  const isMobile = width < 768;
+  const navHeight = isMobile ? 72 : 96;
 
   const { cardWidth, cardHeight, spreadDistance, compactDistance, fontScale } =
-    getResponsiveCardMetrics(width, height, navHeight);
+    getResponsiveCardMetrics(width, height, navHeight, isMobile);
 
   return (
     <section className="relative bg-[#140B26] overflow-x-clip">
@@ -263,7 +324,9 @@ export default function Customer() {
         </motion.div>
       </div>
 
-      <div ref={targetRef} className="relative h-[150vh]">
+      {/* Increased from 150vh -> 260vh: more scroll distance per card means
+          each entrance/flip/exit plays out gradually instead of snapping. */}
+      <div ref={targetRef} className="relative h-[260vh]">
         <div
           className="sticky w-full flex items-center justify-center overflow-hidden"
           style={{
@@ -277,12 +340,14 @@ export default function Customer() {
               key={review.name}
               review={review}
               index={i}
+              total={reviews.length}
               scrollYProgress={smoothProgress}
               cardWidth={cardWidth}
               cardHeight={cardHeight}
               spreadDistance={spreadDistance}
               compactDistance={compactDistance}
               fontScale={fontScale}
+              isMobile={isMobile}
             />
           ))}
         </div>

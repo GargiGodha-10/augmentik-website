@@ -25,7 +25,7 @@ const initialMessages: ChatMessage[] = [
     id: "welcome",
     role: "assistant",
     content:
-      "Hi! I'm Auggie, your AI recruiting assistant. Ask me anything about Augmentik.",
+      "Hi! I'm Auggie, your AI assistant. Ask me anything about Augmentik.",
     time: "",
   },
 ];
@@ -205,7 +205,7 @@ export default function AIAssistant() {
                 <div>
                   <h3 className="font-bold text-white leading-tight text-sm sm:text-base">Auggie</h3>
                   <p className="text-xs sm:text-sm text-gray-400 leading-tight">
-                    AI Recruiting Assistant
+                    AI Assistant
                   </p>
                   <span className="mt-0.5 inline-flex items-center gap-1.5 text-[11px] sm:text-xs text-emerald-400">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
